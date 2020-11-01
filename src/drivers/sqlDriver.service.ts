@@ -29,6 +29,9 @@ export class SqlDriver {
   addUserToProject(userId: string, projectId: string) {
     throw new Error('Method not implemented');
   }
+  updateProject(userId: string, projectId: string, name: string, description: string, color: string){
+    throw new Error('Method not implemented');
+  }
   addAdminToProject(userId: string, projectId: string) {
     throw new Error('Method not implemented');
   }
@@ -38,9 +41,18 @@ export class SqlDriver {
   getAllIdeasForProject(projectId: string) {
     throw new Error('Method not implemented');
   }
+  deleteProject(userId: string, projectId: string) {
+    throw new Error('Method not implemented');
+  }
 
   // Functions for ideas
   createIdea(userId: string, projectId: string, idea: string, timestamp: string) {
+    throw new Error('Method not implemented');
+  }
+  updateIdea(userId: string, projectId: string, idea: string, timestamp: string) {
+    throw new Error('Method not implemented');
+  }
+  getIdea(userId: string, projectId: string, ideaId: string) {
     throw new Error('Method not implemented');
   }
   changeStateOfIdea(projectId: string, ideaId: string, newState: string){
@@ -63,6 +75,12 @@ export class SqlDriver {
   deleteComment(userId: string, projectId: string, ideaId: string) {
     throw new Error('Method not implemented');
   }
+  updateComment(userId: string, projectId: string, ideaId: string, comment: string) {
+    throw new Error('Method not implemented');
+  }
+  getComment(userId: string, projectId: string, ideaId: string, comment: string) {
+    throw new Error('Method not implemented');
+  }
 
   // Functions for votes
   addVote(userId: string, vote: boolean) {
@@ -74,6 +92,5 @@ export class SqlDriver {
   updateVote(userId: string, projectId: string, ideaId: string, voteId: string, vote: boolean) {
     throw new Error('Method not implemented');
   }
-
-
+  
 }
