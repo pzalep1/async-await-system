@@ -71,6 +71,9 @@ export class SqlDriver {
   deleteVote(userId: string, projectId: string, ideaId: string, voteId: string) {
     throw new Error('Method not implemented');
   }
+  updateVote(userId: string, projectId: string, ideaId: string, voteId: string, vote: boolean) {
+    throw new Error('Method not implemented');
+  }
 
 
 }
