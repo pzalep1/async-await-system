@@ -12,10 +12,10 @@ export class CommentController {
   @HttpCode(201)
   createComment(@Param() routeParameterDTO: any): any {
     try {
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
-      const comment=routeParameterDTO.comment;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      const comment = routeParameterDTO.comment;
       return this.commentService.createComment(userId,projectId,ideaId,comment);
     }
     catch(e){
@@ -29,9 +29,9 @@ export class CommentController {
   @HttpCode(200)
   deleteComment(@Param() routeParameterDTO: any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
       return this.commentService.deleteComment(userId,projectId,ideaId);
     }
     catch(e){
@@ -45,10 +45,10 @@ export class CommentController {
   @HttpCode(201)
   updateComment(@Param() routeParameterDTO: any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
-      const comment=routeParameterDTO.comment;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      const comment = routeParameterDTO.comment;
       return this.commentService.updateComment(userId,projectId,ideaId,comment);
     }
     catch(e){
@@ -61,10 +61,10 @@ export class CommentController {
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/comments/:commentId')
   @HttpCode(200)
   getComment(@Param() routeParameterDTO:any):any{
-    const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
-      const comment=routeParameterDTO.comment;
+    const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      const comment = routeParameterDTO.comment;
       return this.commentService.getComment(userId,projectId,ideaId,comment);
   }
 }

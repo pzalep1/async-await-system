@@ -39,8 +39,8 @@ export class ProjectController {
   @HttpCode(200)
   getProject(@Param() routeParameterDTO: any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
       return this.projectService.getProject(userId,projectId);
     }
     catch(e){
@@ -54,10 +54,10 @@ export class ProjectController {
   @HttpCode(201)
   createProject(@Param() routeParameterDTO: any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const name=routeParameterDTO.name;
-      const description=routeParameterDTO.description;
-      const color=routeParameterDTO.color;
+      const userId = routeParameterDTO.userId;
+      const name = routeParameterDTO.name;
+      const description = routeParameterDTO.description;
+      const color = routeParameterDTO.color;
       return this.projectService.createProject(userId,name,description,color);
     }
     catch(e){
@@ -72,8 +72,8 @@ export class ProjectController {
   @HttpCode(201)
   addUserToProject(@Param() routeParameterDTO: any):any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
       return this.projectService.addUserToProject(userId,projectId);
     }
     catch(e){
@@ -88,8 +88,8 @@ export class ProjectController {
  @HttpCode(201)
  addAdminToProject(@Param() routeParameterDTO: any):any{
    try{
-     const userId=routeParameterDTO.userId;
-     const projectId=routeParameterDTO.projectId;
+     const userId = routeParameterDTO.userId;
+     const projectId = routeParameterDTO.projectId;
      return this.projectService.addAdminToProject(userId,projectId);
    }
    catch(e){
@@ -103,11 +103,11 @@ export class ProjectController {
  @HttpCode(201)
  updateProject(@Param() routeParameterDTO: any):any{
    try{
-     const userId=routeParameterDTO.userId;
-     const projectId=routeParameterDTO.projectId;
-     const name=routeParameterDTO.name;
-     const description=routeParameterDTO.description;
-     const color=routeParameterDTO.color;
+     const userId = routeParameterDTO.userId;
+     const projectId = routeParameterDTO.projectId;
+     const name = routeParameterDTO.name;
+     const description = routeParameterDTO.description;
+     const color = routeParameterDTO.color;
      return this.projectService.updateProject(userId,projectId,name,description,color);
    }
    catch(e){
@@ -122,8 +122,8 @@ export class ProjectController {
  @HttpCode(200)
  deleteUserFromProject(@Param() routeParameterDTO: any):any{
    try{
-    const userId=routeParameterDTO.userId;
-    const projectId=routeParameterDTO.projectId;
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
     return this.projectService.deleteUsersFromProject(userId,projectId);
    }
    catch(e){
@@ -138,7 +138,7 @@ export class ProjectController {
  @HttpCode(200)
  getAllIdeasForProject(@Param() routeParameterDTO: any):any{
     try{
-     const projectId=routeParameterDTO.projectId;
+     const projectId = routeParameterDTO.projectId;
      return this.projectService.getAllIdeasForProject(projectId);
     }
     catch(e){
@@ -152,8 +152,8 @@ export class ProjectController {
   @HttpCode(200)
   deleteProject(@Param() routeParameterDTO: any):any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
       return this.projectService.deleteProject(userId,projectId);
     }
     catch(e){

@@ -31,7 +31,7 @@ export class UserController {
  @HttpCode(200)
  deleteUser(@Param() routeParameterDTO:any):any{
    try{
-     const userId=routeParameterDTO.userId;
+     const userId = routeParameterDTO.userId;
      return this.userService.deleteUser(userId);
    }
    catch(e){
@@ -45,7 +45,7 @@ export class UserController {
  @HttpCode(201)
  updateUser(@Param() routeParameterDTO:any):any{
    try{
-     const userId=routeParameterDTO.userId;
+     const userId = routeParameterDTO.userId;
      return this.userService.updateUser(userId);
    }
    catch(e){

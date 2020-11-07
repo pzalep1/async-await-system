@@ -12,10 +12,10 @@ export class IdeaController {
   @HttpCode(201)
   createIdea(@Param() routeParameterDTO: any): any {
     try {
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const idea=routeParameterDTO.idea;
-      const timeStamp=routeParameterDTO.timeStamp;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const idea = routeParameterDTO.idea;
+      const timeStamp = routeParameterDTO.timeStamp;
       return this.ideaService.createIdea(userId,projectId,idea,timeStamp);
     }
     catch(e) {
@@ -29,10 +29,10 @@ export class IdeaController {
  @HttpCode(201)
  updateIdea(@Param() routeParameterDTO: any):any{
    try{
-    const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const idea=routeParameterDTO.idea;
-      const timeStamp=routeParameterDTO.timeStamp;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const idea = routeParameterDTO.ideaId;
+      const timeStamp = routeParameterDTO.timeStamp;
       return this.ideaService.updateIdea(userId,projectId,idea,timeStamp);
    }
    catch(e){
@@ -46,9 +46,9 @@ export class IdeaController {
   @HttpCode(200)
   getIdea(@Param() routeParameterDTO: any): any{
     try{  
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
       return this.ideaService.getIdea(userId,projectId,ideaId);
     }
     catch(e){
@@ -62,9 +62,9 @@ export class IdeaController {
   @HttpCode(201)
   changeState(@Param() routeParameterDTO: any): any{
     try{
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
-      const newState=routeParameterDTO.newState;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      const newState = routeParameterDTO.newState;
       return this.ideaService.changeStateOfIdea(projectId,ideaId,newState);
     }
     catch(e){
@@ -78,8 +78,8 @@ export class IdeaController {
   @HttpCode(200)
   deleteIdea(@Param() routeParameterDTO: any): any{
     try{
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
       return this.ideaService.deleteIdea(projectId,ideaId);
     }
     catch(e){
@@ -93,8 +93,8 @@ export class IdeaController {
   @HttpCode(200)
   getComments(@Param() routeParameterDTO: any): any{
     try{
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideadId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
       return this.ideaService.getCommentsForIdea(projectId,ideaId);
     }
     catch(e){

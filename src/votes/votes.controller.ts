@@ -12,9 +12,9 @@ export class VotesController {
   @HttpCode(200)
   getVotes(@Param() routeParameterDTO:any): any{
     try{
-      const projectId=routeParameterDTO.projectId;
-      const ideadId=routeParameterDTO.ideaId;
-      return this.voteService.getVotesForIdea(projectId,ideadId);
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      return this.voteService.getVotesForIdea(projectId,ideaId);
     }
     catch(e){
       console.log(e);
@@ -27,8 +27,8 @@ export class VotesController {
   @HttpCode(201)
   addVote(@Param() routeParameterDTO:any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const vote=routeParameterDTO.vote;
+      const userId = routeParameterDTO.userId;
+      const vote = routeParameterDTO.vote;
       return this.voteService.addVote(userId,vote);
     }
     catch(e){
@@ -42,10 +42,10 @@ export class VotesController {
   @HttpCode(200)
   deleteVote(@Param() routeParameterDTO:any): any{
     try{
-      const userId=routeParameterDTO.userId;
-      const projectId=routeParameterDTO.projectId;
-      const ideaId=routeParameterDTO.ideaId;
-      const voteId=routeParameterDTO.voteId;
+      const userId = routeParameterDTO.userId;
+      const projectId = routeParameterDTO.projectId;
+      const ideaId = routeParameterDTO.ideaId;
+      const voteId = routeParameterDTO.voteId;
       return this.voteService.deleteVote(userId,projectId,ideaId,voteId);
     }
     catch(e){
@@ -59,11 +59,11 @@ export class VotesController {
  @HttpCode(201)
  updateVote(@Param() routeParameterDTO:any):any{
    try{
-    const userId=routeParameterDTO.userId;
-    const projectId=routeParameterDTO.projectId;
-    const ideaId=routeParameterDTO.ideaId;
-    const voteId=routeParameterDTO.voteId;
-    const vote=routeParameterDTO.vote;
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    const voteId = routeParameterDTO.voteId;
+    const vote = routeParameterDTO.vote;
     return this.voteService.updateVote(userId,projectId,ideaId,voteId,vote);
    }
    catch(e){

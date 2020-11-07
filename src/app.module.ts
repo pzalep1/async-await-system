@@ -15,7 +15,6 @@ import { VotesModule } from './votes/votes.module';
     ProjectModule,
     CommentModule,
     VotesModule,
-    DriverModule
   ],
   controllers: [AppController],
   providers: [AppService],
