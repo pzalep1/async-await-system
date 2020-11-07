@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UserController } from './users.controller';
 import { UserService } from './users.service';
-
+import { SqlDriver } from '../drivers/sqlDriver.service';
 @Module({
-  imports: [],
+  imports: [SqlDriver],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, SqlDriver],
 })
 export class UserModule {}

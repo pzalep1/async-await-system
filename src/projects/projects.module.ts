@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ProjectController } from './projects.controller';
 import { ProjectService } from './projects.service';
+import { SqlDriver } from '../drivers/sqlDriver.service';
 @Module({
-  imports: [],
+  imports: [SqlDriver],
   controllers: [ProjectController],
-  providers: [ProjectService]
+  providers: [ProjectService, SqlDriver]
 })
 export class ProjectModule {}
