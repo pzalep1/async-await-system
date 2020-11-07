@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Req } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
 import { ProjectService } from './projects.service';
 
 @Controller()
@@ -52,7 +52,7 @@ export class ProjectController {
   */
   @Post('/users/:userId/projects')
   @HttpCode(201)
-  createProject(@Param() routeParameterDTO: any): any{
+  createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
       const name = routeParameterDTO.name;
@@ -68,9 +68,9 @@ export class ProjectController {
   * Will add a user to a project
   * !!! ROUTE NEEDED !!!
   */
-  @Post()
+  @Post('/users/:userId/projects/:projectId/users')
   @HttpCode(201)
-  addUserToProject(@Param() routeParameterDTO: any):any{
+  addUserToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
     try{
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
@@ -84,9 +84,9 @@ export class ProjectController {
   * Will add an Admin to a project
   * !!! ROUTE NEEDED !!!
   */
- @Post()
+ @Post('/users/:userId/projects/:projectId/admin/users')
  @HttpCode(201)
- addAdminToProject(@Param() routeParameterDTO: any):any{
+ addAdminToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;
      const projectId = routeParameterDTO.projectId;
@@ -101,7 +101,7 @@ export class ProjectController {
   */
  @Patch('/users/:userId/projects/:projectId')
  @HttpCode(201)
- updateProject(@Param() routeParameterDTO: any):any{
+ updateProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;
      const projectId = routeParameterDTO.projectId;
@@ -118,7 +118,7 @@ export class ProjectController {
  * Deletes a user from a project
  * NEEDS ROUTE
  */
- @Delete()
+ @Delete('/users/:userId/projects/:projectId/users/:userId')
  @HttpCode(200)
  deleteUserFromProject(@Param() routeParameterDTO: any):any{
    try{
@@ -131,7 +131,7 @@ export class ProjectController {
    }
  }
  /*
- * Gets ideads for a project
+ * Gets ideas for a project
  * Is the route from the wiki right?
  */
  @Get('/users/:userId/projects/:projectId/ideas')

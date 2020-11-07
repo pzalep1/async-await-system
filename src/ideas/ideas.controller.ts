@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
 import { IdeaService } from './ideas.service';
 
 @Controller()
@@ -10,7 +10,7 @@ export class IdeaController {
    */
   @Post('/users/:userId/projects/:projectId/ideas')
   @HttpCode(201)
-  createIdea(@Param() routeParameterDTO: any): any {
+  createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
     try {
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
@@ -27,7 +27,7 @@ export class IdeaController {
   */
  @Patch('/users/:userId/projects/:projectId/ideas/:ideaId')
  @HttpCode(201)
- updateIdea(@Param() routeParameterDTO: any):any{
+ updateIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any):any{
    try{
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
@@ -60,7 +60,7 @@ export class IdeaController {
   */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/status')
   @HttpCode(201)
-  changeState(@Param() routeParameterDTO: any): any{
+  changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
     try{
       const projectId = routeParameterDTO.projectId;
       const ideaId = routeParameterDTO.ideaId;

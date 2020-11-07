@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
+import { Request } from 'express';
 import { CommentService } from './comments.service';
 
 @Controller()
@@ -10,7 +11,7 @@ export class CommentController {
    */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/comments')
   @HttpCode(201)
-  createComment(@Param() routeParameterDTO: any): any {
+  createComment(@Param() routeParameterDTO: any, @Body() commentWriteDTO: any): any {
     try {
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
@@ -43,7 +44,7 @@ export class CommentController {
   */
   @Patch('/users/:userId/projects/:projectId/ideas/:ideaId/comments/:commentId')
   @HttpCode(201)
-  updateComment(@Param() routeParameterDTO: any): any{
+  updateComment(@Param() routeParameterDTO: any, @Body() commentWriteDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
