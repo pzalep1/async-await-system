@@ -6,13 +6,16 @@ export class UserService {
   constructor(private readonly sqlDriver: SqlDriver) {
 
   }
-  createUser():any{
+  createUser(): any{
     return this.sqlDriver.createUser();
   }
-  updateUser(userId:string):any{
+  updateUser(userId: string): any{
     return this.sqlDriver.updateUser(userId);
   }
-  deleteUser(userId:string):any{
+  deleteUser(userId: string): any{
     return this.sqlDriver.deleteUser(userId);
+  }
+  login(userId: string): any{
+    return userId;
   }
 }

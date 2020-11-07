@@ -24,6 +24,16 @@ export class UserController {
       console.log(e);
     }
   }
+
+  @Patch('/users')
+  @HttpCode(200)
+  login(): any {
+    try {
+      return this.userService.login('hello');
+    } catch(e) {
+      console.log(e);
+    }
+  }
   /*
   * Will delete a user
   */

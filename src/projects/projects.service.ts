@@ -5,35 +5,35 @@ import { SqlDriver } from '../drivers/sqlDriver.service';
 export class ProjectService {
   constructor(private readonly sqlDriver: SqlDriver) {}
   
-  getAdminProjects(userId: string):any{
+  getAdminProjects(userId: string): any {
     return this.sqlDriver.getAllProjectsForAdmin(userId);
   }
-  getUserProjects(userId: string):any{
+  getUserProjects(userId: string): any {
     return this.sqlDriver.getAllProjectsForUser(userId);
   }
   //edited route
-  getProject(userId: string,projectId: string):any{
+  getProject(userId: string,projectId: string): any {
     return this.sqlDriver.getProject(userId,projectId);
   }
-  createProject(userId: string, name: string, description: string, color: string){
+  createProject(userId: string, name: string, description: string, color: string): any {
     return this.sqlDriver.createProject(userId,name,description,color);
   }
-  addUserToProject(userId: string, projectId: string){
+  addUserToProject(userId: string, projectId: string): any {
     return this.sqlDriver.addUserToProject(userId,projectId);
   }
-  addAdminToProject(userId: string, projectId: string){
+  addAdminToProject(userId: string, projectId: string): any {
     return this.sqlDriver.addAdminToProject(userId,projectId);
   }
-  updateProject(userId: string, projectId: string, name: string, description: string, color: string){
+  updateProject(userId: string, projectId: string, name: string, description: string, color: string): any {
     return this.sqlDriver.updateProject(userId,projectId,name,description,color);
   }
-  deleteUsersFromProject(userId: string, projectId: string){
+  deleteUsersFromProject(userId: string, projectId: string): any {
     return this.sqlDriver.deleteUsersFromProject(userId,projectId);
   }
-  getAllIdeasForProject(projectId: string){
+  getAllIdeasForProject(projectId: string): any {
     return this.sqlDriver.getAllIdeasForProject(projectId);
   }
-  deleteProject(userId: string, projectId: string){
+  deleteProject(userId: string, projectId: string): any {
     return this.sqlDriver.deleteProject(userId,projectId);
   }
 }
