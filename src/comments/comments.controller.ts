@@ -16,7 +16,7 @@ export class CommentController {
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
       const ideaId = routeParameterDTO.ideaId;
-      const comment = routeParameterDTO.comment;
+      const comment = commentWriteDTO.comment;
       return this.commentService.createComment(userId,projectId,ideaId,comment);
     }
     catch(e){
@@ -49,8 +49,9 @@ export class CommentController {
       const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
       const ideaId = routeParameterDTO.ideaId;
-      const comment = routeParameterDTO.comment;
-      return this.commentService.updateComment(userId,projectId,ideaId,comment);
+      const commentId = routeParameterDTO.commentId;
+      const comment = commentWriteDTO.comment;
+      return this.commentService.updateComment(userId, projectId, ideaId, commentId, comment);
     }
     catch(e){
       console.log(e);
@@ -65,7 +66,7 @@ export class CommentController {
     const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
       const ideaId = routeParameterDTO.ideaId;
-      const comment = routeParameterDTO.comment;
+      const comment = routeParameterDTO.commentId;
       return this.commentService.getComment(userId,projectId,ideaId,comment);
   }
 }

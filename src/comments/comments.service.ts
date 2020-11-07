@@ -11,7 +11,7 @@ export class CommentService {
   deleteComment(userId: string, projectId: string, ideaId: string): any {
     return this.sqlDriver.deleteComment(userId,projectId,ideaId);
   }
-  updateComment(userId: string, projectId: string, ideaId: string, comment: string): any {
+  updateComment(userId: string, projectId: string, ideaId: string, commentId: string, comment: string): any {
     return this.sqlDriver.updateComment(userId,projectId,ideaId,comment);
   }
   getComment(userId: string, projectId: string, ideaId: string, comment: string): any {
