@@ -1,4 +1,4 @@
-import { Module } from 'idea-service/node_modules/@nestjs/common';
+import { Module } from '@nestjs/common';
 import { VotesController } from './votes.controller';
 import { VotesService } from './votes.service';
 import { SqlDriver } from '../drivers/sqlDriver.service';

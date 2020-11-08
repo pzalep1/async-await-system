@@ -1,4 +1,4 @@
-import { Injectable } from 'idea-service/node_modules/@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SqlDriver } from '../drivers/sqlDriver.service';
 
 @Injectable()

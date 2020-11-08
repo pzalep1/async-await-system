@@ -1,6 +1,6 @@
-import { Test, TestingModule } from 'idea-service/node_modules/@nestjs/testing';
-import { INestApplication } from 'idea-service/node_modules/@nestjs/common';
-import * as request from 'idea-service/node_modules/supertest';
+import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 
 describe('AppController (e2e)', () => {

@@ -1,4 +1,4 @@
-import { Module } from 'idea-service/node_modules/@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ProjectController } from './projects.controller';
 import { ProjectService } from './projects.service';
 import { SqlDriver } from '../drivers/sqlDriver.service';

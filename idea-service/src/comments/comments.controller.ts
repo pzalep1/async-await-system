@@ -1,5 +1,4 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from 'idea-service/node_modules/@nestjs/common';
-import { Request } from 'idea-service/node_modules/express';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
 import { CommentService } from './comments.service';
 
 @Controller()
