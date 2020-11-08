@@ -1,4 +1,4 @@
-import { Controller, Delete, HttpCode, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, HttpCode, Param, Patch, Post } from "@nestjs/common";
 import { UserService } from "./users.service";
 
 @Controller()
@@ -25,6 +25,9 @@ export class UserController {
     }
   }
 
+  /**
+   * Will log in a user
+   */
   @Patch('/users')
   @HttpCode(200)
   login(): any {
@@ -53,7 +56,7 @@ export class UserController {
  */
  @Patch('/users/:userId')
  @HttpCode(201)
- updateUser(@Param() routeParameterDTO:any):any{
+ updateUser(@Param() routeParameterDTO:any, @Body() userWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;
      return this.userService.updateUser(userId);
