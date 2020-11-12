@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { ProjectService } from './projects.service';
 
 @Controller()
@@ -10,6 +11,7 @@ export class ProjectController {
    */
   @Get('/users/:userId/projects')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   // @ApiBadRequestResponse({description: 'The userId is not a valid userId'})
   getUserProjects(@Param() routeParameterDTO: any): any {
     try {
@@ -24,6 +26,7 @@ export class ProjectController {
    */
   @Get('/users/:userId/projects')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getAdminProjects(@Param() routeParameterDTO: any): any {
     try {
       const userId = routeParameterDTO.userId;
@@ -37,6 +40,7 @@ export class ProjectController {
   */
   @Get('/users/:userId/projects/:projectId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getProject(@Param() routeParameterDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -52,6 +56,7 @@ export class ProjectController {
   */
   @Post('/users/:userId/projects')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -70,6 +75,7 @@ export class ProjectController {
   */
   @Post('/users/:userId/projects/:projectId/users')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   addUserToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
     try{
       const userId = routeParameterDTO.userId;
@@ -86,6 +92,7 @@ export class ProjectController {
   */
  @Post('/users/:userId/projects/:projectId/admin/users')
  @HttpCode(201)
+ @UseGuards(JwtAuthGuard)
  addAdminToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;
@@ -101,6 +108,7 @@ export class ProjectController {
   */
  @Patch('/users/:userId/projects/:projectId')
  @HttpCode(201)
+ @UseGuards(JwtAuthGuard)
  updateProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;
@@ -120,6 +128,7 @@ export class ProjectController {
  */
  @Delete('/users/:userId/projects/:projectId/users/:userId')
  @HttpCode(200)
+ @UseGuards(JwtAuthGuard)
  deleteUserFromProject(@Param() routeParameterDTO: any):any{
    try{
     const userId = routeParameterDTO.userId;
@@ -136,6 +145,7 @@ export class ProjectController {
  */
  @Get('/users/:userId/projects/:projectId/ideas')
  @HttpCode(200)
+ @UseGuards(JwtAuthGuard)
  getAllIdeasForProject(@Param() routeParameterDTO: any):any{
     try{
      const projectId = routeParameterDTO.projectId;
@@ -150,6 +160,7 @@ export class ProjectController {
   */
   @Delete('/users/:userId/projects/:projectId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   deleteProject(@Param() routeParameterDTO: any):any{
     try{
       const userId = routeParameterDTO.userId;

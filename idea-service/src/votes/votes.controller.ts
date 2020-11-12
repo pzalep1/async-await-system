@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { VotesService } from './votes.service';
 
 @Controller()
@@ -10,6 +11,7 @@ export class VotesController {
   */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/votes')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getVotes(@Param() routeParameterDTO:any): any{
     try{
       const projectId = routeParameterDTO.projectId;
@@ -25,6 +27,7 @@ export class VotesController {
   */
   @Post('/users/:userId/projects/:projectId/ideas/votes/:voteId')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   addVote(@Param() routeParameterDTO:any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -40,6 +43,7 @@ export class VotesController {
   */
   @Delete('/users/:userId/projects/:projectId/ideas/:ideaId/votes/:voteId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   deleteVote(@Param() routeParameterDTO:any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -57,6 +61,7 @@ export class VotesController {
   */
  @Patch('/users/:userId/projects/:projectId/ideas/:ideaId/votes/:voteId')
  @HttpCode(201)
+ @UseGuards(JwtAuthGuard)
  updateVote(@Param() routeParameterDTO:any):any{
    try{
     const userId = routeParameterDTO.userId;

@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { IdeaService } from './ideas.service';
 
 @Controller()
@@ -10,6 +11,7 @@ export class IdeaController {
    */
   @Post('/users/:userId/projects/:projectId/ideas')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
     try {
       const userId = routeParameterDTO.userId;
@@ -27,6 +29,7 @@ export class IdeaController {
   */
  @Patch('/users/:userId/projects/:projectId/ideas/:ideaId')
  @HttpCode(201)
+ @UseGuards(JwtAuthGuard)
  updateIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any):any{
    try{
       const userId = routeParameterDTO.userId;
@@ -44,6 +47,7 @@ export class IdeaController {
  */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getIdea(@Param() routeParameterDTO: any): any{
     try{  
       const userId = routeParameterDTO.userId;
@@ -60,6 +64,7 @@ export class IdeaController {
   */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/status')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
     try{
       const projectId = routeParameterDTO.projectId;
@@ -76,6 +81,7 @@ export class IdeaController {
   */
   @Delete('/users/:userId/projects/:projectId/ideas/:ideaId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   deleteIdea(@Param() routeParameterDTO: any): any{
     try{
       const projectId = routeParameterDTO.projectId;
@@ -91,6 +97,7 @@ export class IdeaController {
   */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/comments')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getComments(@Param() routeParameterDTO: any): any{
     try{
       const projectId = routeParameterDTO.projectId;

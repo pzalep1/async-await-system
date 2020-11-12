@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, HttpCode, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, HttpCode, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "src/jwt/jwt-auth.guard";
 import { UserService } from "./users.service";
 
 @Controller()
@@ -32,7 +33,8 @@ export class UserController {
   @HttpCode(200)
   login(): any {
     try {
-      return this.userService.login('hello');
+      console.log('blah blah blah')
+      return this.userService.login({userId: 'hello', fName: 'no', lName: 'yes', email:'nope@nope.com'});
     } catch(e) {
       console.log(e);
     }
@@ -42,6 +44,7 @@ export class UserController {
   */
  @Delete('/users/:userId')
  @HttpCode(200)
+ @UseGuards(JwtAuthGuard)
  deleteUser(@Param() routeParameterDTO:any):any{
    try{
      const userId = routeParameterDTO.userId;
@@ -56,6 +59,7 @@ export class UserController {
  */
  @Patch('/users/:userId')
  @HttpCode(201)
+ @UseGuards(JwtAuthGuard)
  updateUser(@Param() routeParameterDTO:any, @Body() userWriteDTO: any):any{
    try{
      const userId = routeParameterDTO.userId;

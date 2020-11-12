@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SqlDriver } from '../drivers/sqlDriver.service';
-
+import { generateBearerToken } from '../jwt/generateBearerToken';
 @Injectable()
 export class UserService {
   constructor(private readonly sqlDriver: SqlDriver) {
@@ -15,7 +15,8 @@ export class UserService {
   deleteUser(userId: string): any{
     return this.sqlDriver.deleteUser(userId);
   }
-  login(userId: string): any{
-    return userId;
+  login(user: any): any{
+    const token = generateBearerToken(user)
+    return token;
   }
 }

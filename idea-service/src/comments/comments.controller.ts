@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { CommentService } from './comments.service';
 
 @Controller()
@@ -10,6 +11,7 @@ export class CommentController {
    */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/comments')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   createComment(@Param() routeParameterDTO: any, @Body() commentWriteDTO: any): any {
     try {
       const userId = routeParameterDTO.userId;
@@ -27,6 +29,7 @@ export class CommentController {
   */
   @Delete('/users/:userId/projects/:projectId/ideas/:ideaId/comments/:commentId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   deleteComment(@Param() routeParameterDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -43,6 +46,7 @@ export class CommentController {
   */
   @Patch('/users/:userId/projects/:projectId/ideas/:ideaId/comments/:commentId')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   updateComment(@Param() routeParameterDTO: any, @Body() commentWriteDTO: any): any{
     try{
       const userId = routeParameterDTO.userId;
@@ -61,6 +65,7 @@ export class CommentController {
   */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/comments/:commentId')
   @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
   getComment(@Param() routeParameterDTO:any):any{
     const userId = routeParameterDTO.userId;
       const projectId = routeParameterDTO.projectId;
