@@ -21,7 +21,6 @@ export class UserController {
   addUser(@Body() userWriteDTO: any):any{
     try{
       const user = userWriteDTO.user as User;
-      console.log(userWriteDTO);
       return this.userService.createUser(user);
     }
     catch(e){
@@ -52,21 +51,6 @@ export class UserController {
    try{
      const userId = routeParameterDTO.userId;
      return this.userService.deleteUser(userId);
-   }
-   catch(e){
-     console.log(e);
-   }
- }
- /*
- * Will update a user
- */
- @Patch('/users/:userId')
- @HttpCode(201)
- @UseGuards(JwtAuthGuard)
- updateUser(@Param() routeParameterDTO:any, @Body() userWriteDTO: any):any{
-   try{
-     const userId = routeParameterDTO.userId;
-     return this.userService.updateUser(userId);
    }
    catch(e){
      console.log(e);
