@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, HttpCode, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { User } from "src/entities/user.entity";
 import { JwtAuthGuard } from "src/jwt/jwt-auth.guard";
 import { UserService } from "./users.service";
 
@@ -19,7 +20,9 @@ export class UserController {
   @HttpCode(201)
   addUser(@Body() userWriteDTO: any):any{
     try{
-      return this.userService.createUser();
+      const user = userWriteDTO.user as User;
+      console.log(userWriteDTO);
+      return this.userService.createUser(user);
     }
     catch(e){
       console.log(e);
