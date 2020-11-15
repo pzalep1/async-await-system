@@ -6,12 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Administers } from 'src/entities/administers.entity';
 import { Member } from 'src/entities/member.entity';
 import { Idea } from 'src/entities/idea.entity';
+import { User } from 'src/entities/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Project]),
     TypeOrmModule.forFeature([Administers]),
     TypeOrmModule.forFeature([Member]),
-    TypeOrmModule.forFeature([Idea])
+    TypeOrmModule.forFeature([Idea]),
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [ProjectController],
   providers: [ProjectService]

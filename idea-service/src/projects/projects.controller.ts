@@ -1,6 +1,5 @@
 import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
-import { UserService } from 'src/users/users.service';
 import { ProjectService } from './projects.service';
 
 @Controller()
@@ -56,7 +55,6 @@ export class ProjectController {
   }
   /*
   * Will add an Admin to a project
-  * !!! ROUTE NEEDED !!!
   */
  @Post('/users/:userId/projects/:projectId/admin/users')
  @HttpCode(201)
@@ -70,7 +68,7 @@ export class ProjectController {
   * Will update a project
   */
  @Patch('/users/:userId/projects/:projectId')
- @HttpCode(201)
+ @HttpCode(200)
  @UseGuards(JwtAuthGuard)
  updateProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
     const projectId = routeParameterDTO.projectId;
@@ -81,7 +79,6 @@ export class ProjectController {
  }
  /*
  * Deletes a user from a project
- * NEEDS ROUTE
  */
  @Delete('/users/:userId/projects/:projectId/users/:userId')
  @HttpCode(200)
@@ -93,7 +90,6 @@ export class ProjectController {
  }
  /*
  * Gets ideas for a project
- * Is the route from the wiki right?
  */
  @Get('/users/:userId/projects/:projectId/ideas')
  @HttpCode(200)
