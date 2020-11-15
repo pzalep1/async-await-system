@@ -31,7 +31,8 @@ export class UserService {
     if (found) {
       if(user.password === found.password) {
         const token = generateBearerToken(user);
-        return token;
+        delete found.password;
+        return { token, found };
       } else {
         throw new HttpException('Incorrect Password', HttpStatus.UNAUTHORIZED);
       }
