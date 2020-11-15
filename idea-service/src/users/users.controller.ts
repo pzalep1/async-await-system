@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpCode, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, HttpCode, Param, Patch, Post, Get, UseGuards } from "@nestjs/common";
 import { User } from "src/entities/user.entity";
 import { JwtAuthGuard } from "src/jwt/jwt-auth.guard";
 import { UserService } from "./users.service";
@@ -18,14 +18,9 @@ export class UserController {
   */
   @Post('/users')
   @HttpCode(201)
-  addUser(@Body() userWriteDTO: any):any{
-    try{
-      const user = userWriteDTO.user as User;
-      return this.userService.createUser(user);
-    }
-    catch(e){
-      console.log(e);
-    }
+  addUser(@Body() userWriteDTO: any): any {
+    const user = userWriteDTO.user as User;
+    return this.userService.createUser(user);
   }
 
   /**
@@ -33,13 +28,19 @@ export class UserController {
    */
   @Patch('/users')
   @HttpCode(200)
-  login(): any {
-    try {
-      console.log('blah blah blah')
-      return this.userService.login({userId: 'hello', fName: 'no', lName: 'yes', email:'nope@nope.com'});
-    } catch(e) {
-      console.log(e);
-    }
+  login(@Body() userWriteDTO: any): any {
+    const user = userWriteDTO.user;
+    return this.userService.login(user);
+  }
+
+  /**
+   * Checks if a users token is still valid
+   */
+  @Get('/users/tokens')
+  @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
+  checkToken() {
+    return;
   }
   /*
   * Will delete a user
@@ -48,12 +49,7 @@ export class UserController {
  @HttpCode(200)
  @UseGuards(JwtAuthGuard)
  deleteUser(@Param() routeParameterDTO:any):any{
-   try{
-     const userId = routeParameterDTO.userId;
-     return this.userService.deleteUser(userId);
-   }
-   catch(e){
-     console.log(e);
-   }
+    const userId = routeParameterDTO.userId;
+    return this.userService.deleteUser(userId);
  }
 }

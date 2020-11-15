@@ -12,6 +12,9 @@ export class SqlDriver {
   deleteUser(userId:string) {
     throw new Error('Method not implemented');
   }
+  getUser() {
+    
+  }
 
   // Functions for projects
   //edited route

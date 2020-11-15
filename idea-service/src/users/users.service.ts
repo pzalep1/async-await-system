@@ -1,25 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
-import { SqlDriver } from '../drivers/sqlDriver.service';
 import { generateBearerToken } from '../jwt/generateBearerToken';
 import { Repository } from 'typeorm';
 @Injectable()
 export class UserService {
-  constructor(private readonly sqlDriver: SqlDriver, @InjectRepository(User) private userRepository: Repository<User>) {
+  constructor(@InjectRepository(User) private userRepository: Repository<User>) {
 
   }
-  createUser(user: User): any{
-    return this.userRepository.insert(user);
+  async createUser(user: User): Promise<any> {
+    // SQL Query executed: FROM USER SELECT * WHERE email = user.email;
+    const found = await this.userRepository.createQueryBuilder('User').where('email = :email', { email: user.email }).getOne();
+    if (found) {
+      throw new HttpException('Email already in use', HttpStatus.CONFLICT);
+    } else {
+      return this.userRepository.insert(user);
+    }
   }
-  updateUser(userId: string): any{
-    return this.sqlDriver.updateUser(userId);
+  async deleteUser(userId: string): Promise<any> {
+    const found = await this.userRepository.findOne(userId);
+    if (found) {
+      return this.userRepository.delete(userId);
+    } else {
+      throw new HttpException('User not found. Unable to delete', HttpStatus.NOT_FOUND);
+    }
   }
-  deleteUser(userId: string): any{
-    return this.sqlDriver.deleteUser(userId);
-  }
-  login(user: any): any{
-    const token = generateBearerToken(user)
-    return token;
+  async login(user: any): Promise<any> {
+    // SQL Query executed: FROM USER SELECT * WHERE email = user.email;
+    const found = await this.userRepository.createQueryBuilder('User').where('email = :email', { email: user.email }).getOne();
+    if (found) {
+      if(user.password === found.password) {
+        const token = generateBearerToken(user);
+        return token;
+      } else {
+        throw new HttpException('Incorrect Password', HttpStatus.UNAUTHORIZED);
+      }
+    } else {
+      throw new HttpException('There is no user under that email', HttpStatus.NOT_FOUND);
+    }
   }
 }
