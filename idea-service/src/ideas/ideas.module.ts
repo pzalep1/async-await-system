@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { IdeaController } from './ideas.controller';
 import { IdeaService } from './ideas.service';
-import { SqlDriver } from '../drivers/sqlDriver.service';
 @Module({
-  imports: [SqlDriver],
+  imports: [],
   controllers: [IdeaController],
-  providers: [IdeaService, SqlDriver],
+  providers: [IdeaService],
 })
 export class IdeaModule {}

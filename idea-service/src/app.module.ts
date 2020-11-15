@@ -13,6 +13,9 @@ import { User } from './entities/user.entity';
 import { Project } from './entities/project.entity';
 import { Comment } from './entities/comment.entity';
 import { Idea } from './entities/idea.entity';
+import { Administers } from './entities/administers.entity';
+import { Member } from './entities/member.entity';
+import { Vote } from './entities/vote.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -28,7 +31,7 @@ import { Idea } from './entities/idea.entity';
       username: 'root',
       password: 'example',
       database: 'async-await',
-      entities: [User, Project, Comment, Idea],
+      entities: [User, Project, Comment, Idea, Administers, Member, Vote],
       synchronize: true,
       retryAttempts: 3
     }),

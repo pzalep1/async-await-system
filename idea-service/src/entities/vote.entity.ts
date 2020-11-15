@@ -1,11 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Comment {
-    @Column()
+export class Vote {
+    @PrimaryColumn()
     userId: number;
 
-    @Column()
+    @PrimaryColumn()
     ideaId: number;
 
     @Column()

@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CommentController } from './comments.controller';
 import { CommentService } from './comments.service';
-import { SqlDriver } from '../drivers/sqlDriver.service';
 @Module({
-  imports: [SqlDriver],
+  imports: [],
   controllers: [CommentController],
-  providers: [CommentService, SqlDriver],
+  providers: [CommentService],
 })
 export class CommentModule {}
