@@ -6,6 +6,9 @@ export class Idea {
     ideaId: number;
 
     @Column()
+    projectId: number;
+
+    @Column()
     userId: number;
 
     @Column()

@@ -13,16 +13,10 @@ export class IdeaController {
   @HttpCode(201)
   @UseGuards(JwtAuthGuard)
   createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
-    try {
-      const userId = routeParameterDTO.userId;
-      const projectId = routeParameterDTO.projectId;
-      const idea = routeParameterDTO.idea;
-      const timeStamp = routeParameterDTO.timeStamp;
-      return this.ideaService.createIdea(userId,projectId,idea,timeStamp);
-    }
-    catch(e) {
-      console.log(e)
-    }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const idea = ideaWriteDTO.idea;
+    return this.ideaService.createIdea(userId,projectId,idea);
   }
   /*
   * Will update an idea
@@ -31,16 +25,11 @@ export class IdeaController {
  @HttpCode(201)
  @UseGuards(JwtAuthGuard)
  updateIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any):any{
-   try{
-      const userId = routeParameterDTO.userId;
-      const projectId = routeParameterDTO.projectId;
-      const idea = routeParameterDTO.ideaId;
-      const timeStamp = routeParameterDTO.timeStamp;
-      return this.ideaService.updateIdea(userId,projectId,idea,timeStamp);
-   }
-   catch(e){
-     console.log(e);
-   }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    const idea = ideaWriteDTO.idea;
+    return this.ideaService.updateIdea(userId,projectId,ideaId, idea);
  }
  /*
  *  Get specific idea
@@ -49,15 +38,10 @@ export class IdeaController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   getIdea(@Param() routeParameterDTO: any): any{
-    try{  
-      const userId = routeParameterDTO.userId;
-      const projectId = routeParameterDTO.projectId;
-      const ideaId = routeParameterDTO.ideaId;
-      return this.ideaService.getIdea(userId,projectId,ideaId);
-    }
-    catch(e){
-      console.log(e);
-    }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    return this.ideaService.getIdea(userId,projectId,ideaId);
   }
   /*
   * Will change state of an Idea
@@ -66,15 +50,11 @@ export class IdeaController {
   @HttpCode(201)
   @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
-    try{
-      const projectId = routeParameterDTO.projectId;
-      const ideaId = routeParameterDTO.ideaId;
-      const newState = routeParameterDTO.newState;
-      return this.ideaService.changeStateOfIdea(projectId,ideaId,newState);
-    }
-    catch(e){
-      console.log(e);
-    }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    const newState = ideaWriteDTO.newState;
+    return this.ideaService.changeStateOfIdea(userId, projectId,ideaId,newState);
   }
   /*
   * Will delete an Idea
@@ -83,14 +63,10 @@ export class IdeaController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   deleteIdea(@Param() routeParameterDTO: any): any{
-    try{
-      const projectId = routeParameterDTO.projectId;
-      const ideaId = routeParameterDTO.ideaId;
-      return this.ideaService.deleteIdea(projectId,ideaId);
-    }
-    catch(e){
-      console.log(e);
-    }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    return this.ideaService.deleteIdea(userId, projectId,ideaId);
   }
   /*
   * Will retrieve all comments for an Idea
@@ -99,13 +75,9 @@ export class IdeaController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   getComments(@Param() routeParameterDTO: any): any{
-    try{
-      const projectId = routeParameterDTO.projectId;
-      const ideaId = routeParameterDTO.ideaId;
-      return this.ideaService.getCommentsForIdea(projectId,ideaId);
-    }
-    catch(e){
-      console.log(e);
-    }
+    const userId = routeParameterDTO.userId;
+    const projectId = routeParameterDTO.projectId;
+    const ideaId = routeParameterDTO.ideaId;
+    return this.ideaService.getCommentsForIdea(userId,projectId,ideaId);
   }
 }

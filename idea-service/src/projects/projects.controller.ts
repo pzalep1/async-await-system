@@ -43,7 +43,6 @@ export class ProjectController {
   }
   /*
   * Will add a user to a project
-  * !!! ROUTE NEEDED !!!
   */
   @Post('/users/:userId/projects/:projectId/users')
   @HttpCode(201)
