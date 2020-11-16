@@ -1,10 +1,14 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards, Inject, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { IdeaService } from './ideas.service';
 
-@Controller()
+@Controller({ scope: Scope.REQUEST })
 export class IdeaController {
-  constructor(private readonly ideaService: IdeaService) {}
+  constructor(
+    private readonly ideaService: IdeaService,
+    @Inject(REQUEST) private readonly request: Request) {}
 
   /**
    * Will create an Idea
@@ -50,11 +54,12 @@ export class IdeaController {
   @HttpCode(201)
   @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
+    const requester = this.request.user;
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
     const ideaId = routeParameterDTO.ideaId;
     const newState = ideaWriteDTO.newState;
-    return this.ideaService.changeStateOfIdea(userId, projectId,ideaId,newState);
+    return this.ideaService.changeStateOfIdea(userId, projectId,ideaId,newState, requester);
   }
   /*
   * Will delete an Idea

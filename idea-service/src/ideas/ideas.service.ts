@@ -82,11 +82,12 @@ export class IdeaService {
    * @param ideaId 
    * @param newState 
    */
-  async changeStateOfIdea(userId: number, projectId: number, ideaId: number, newState: string): Promise<any> {
+  async changeStateOfIdea(userId: number, projectId: number, ideaId: number, newState: string, requester: any): Promise<any> {
     const user = await this.userRepository.findOne({userId});
     if (user) {
       const project = await this.projectRepository.findOne({projectId});
-      if (project) {
+      const userAuthorized = await this.adminRepository.findOne({userId: requester.userId, projectId});
+      if (project && userAuthorized) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
           return await this.ideaRepository.update(ideaId, { state: newState, timestamp: Date.now().toString()});

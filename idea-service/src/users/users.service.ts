@@ -30,7 +30,7 @@ export class UserService {
     const found = await this.userRepository.createQueryBuilder('User').where('email = :email', { email: user.email }).getOne();
     if (found) {
       if(user.password === found.password) {
-        const token = generateBearerToken(user);
+        const token = generateBearerToken(found);
         delete found.password;
         return { token, found };
       } else {
