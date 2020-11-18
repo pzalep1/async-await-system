@@ -29,7 +29,15 @@ export const PROJECT_ROUTES = {
     ADD_USER_TO_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/users`;
     },
+    //NEEDS TO BE WRITTEN INTO BACKEND
+    GET_PROJECT_USERS(userId: number, projectId: number): string {
+        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/users`;
+    },
     ADD_ADMIN_USER_TO_PROJECT(userId: number, projectId: number): string {
+        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/admin/users`;
+    },
+    //NEEDS TO BE WRITTEN INTO BACKEND
+    GET_PROJECT_ADMINS(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/admin/users`;
     },
     UPDATE_PROJECT(userId: number, projectId: number): string {
