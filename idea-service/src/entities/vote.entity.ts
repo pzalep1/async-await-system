@@ -5,10 +5,10 @@ export class Vote {
     @PrimaryGeneratedColumn()
     voteId: number;
     
-    @PrimaryColumn()
+    @Column()
     userId: number;
 
-    @PrimaryColumn()
+    @Column()
     ideaId: number;
 
     @Column()

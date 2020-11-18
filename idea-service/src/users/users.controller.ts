@@ -1,11 +1,15 @@
-import { Body, Controller, Delete, HttpCode, Param, Patch, Post, Get, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, HttpCode, Param, Patch, Post, Get, UseGuards, Inject, Scope } from "@nestjs/common";
 import { User } from "src/entities/user.entity";
 import { JwtAuthGuard } from "src/jwt/jwt-auth.guard";
 import { UserService } from "./users.service";
-
-@Controller()
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
+@Controller({scope: Scope.REQUEST})
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    @Inject(REQUEST) private readonly request: Request,
+    ) {}
 
   /*
   API CONTRACT: USER AUTH: 
@@ -50,6 +54,7 @@ export class UserController {
  @UseGuards(JwtAuthGuard)
  deleteUser(@Param() routeParameterDTO:any):any{
     const userId = routeParameterDTO.userId;
-    return this.userService.deleteUser(userId);
+    const requester = this.request.user;
+    return this.userService.deleteUser(userId, requester);
  }
 }

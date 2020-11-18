@@ -17,12 +17,17 @@ export class UserService {
       return this.userRepository.insert(user);
     }
   }
-  async deleteUser(userId: string): Promise<any> {
+  async deleteUser(userId: string, requester: any): Promise<any> {
+    const user = await this.userRepository.findOne(requester.userId);
     const found = await this.userRepository.findOne(userId);
-    if (found) {
+    if (found && found.userId === user.userId) {
       return this.userRepository.delete(userId);
     } else {
-      throw new HttpException('User not found. Unable to delete', HttpStatus.NOT_FOUND);
+      if (!found) {
+        throw new HttpException('User not found. Unable to delete', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException('Not authorized to delete this user', HttpStatus.FORBIDDEN);
+      }
     }
   }
   async login(user: any): Promise<any> {
