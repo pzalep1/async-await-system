@@ -64,7 +64,7 @@ export class VotesService {
       if (project && userAuthorized) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
-          return this.voteRepository.delete({userId, ideaId});
+          return this.voteRepository.delete({voteId});
         } else {
           throw new HttpException('Idea not found', HttpStatus.NOT_FOUND);
         }
@@ -83,7 +83,7 @@ export class VotesService {
       if (project && userAuthorized) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
-          return this.voteRepository.insert({userId, ideaId, vote});
+          return this.voteRepository.update(voteId, {vote});
         } else {
           throw new HttpException('Idea not found', HttpStatus.NOT_FOUND);
         }
