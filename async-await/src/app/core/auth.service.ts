@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { USER_ROUTES } from '../../environments/routes';
-import { retry } from 'rxjs/operators';
 
 const TOKEN_KEY = 'presence';
 @Injectable({
