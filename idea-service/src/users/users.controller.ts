@@ -44,7 +44,8 @@ export class UserController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   checkToken() {
-    return;
+    const requester = this.request.user;
+    return requester;
   }
   /*
   * Will delete a user

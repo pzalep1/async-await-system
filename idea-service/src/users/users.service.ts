@@ -14,7 +14,8 @@ export class UserService {
     if (found) {
       throw new HttpException('Email already in use', HttpStatus.CONFLICT);
     } else {
-      return this.userRepository.insert(user);
+      await this.userRepository.insert(user);
+      return;
     }
   }
   async deleteUser(userId: string, requester: any): Promise<any> {

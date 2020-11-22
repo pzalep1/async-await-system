@@ -1,5 +1,4 @@
 import { environment } from '../environments/environment';
-import * as querystring from 'query-string';
 
 export const USER_ROUTES = {
     CREATE_USER(): string {
@@ -12,101 +11,101 @@ export const USER_ROUTES = {
         return `${environment.apiURL}/users/tokens`;
     },
     DELETE_USER(userId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}`;
+        return `${environment.apiURL}/users/${userId}`;
     }
 };
 
 export const PROJECT_ROUTES = {
     GET_USERS_PROJECTS(userId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects`;
+        return `${environment.apiURL}/users/${userId}/projects`;
     },
     GET_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}`;
     },
     CREATE_PROJECT(userId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects`;
+        return `${environment.apiURL}/users/${userId}/projects`;
     },
     ADD_USER_TO_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/users`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
     //NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_USERS(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/users`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
     ADD_ADMIN_USER_TO_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/admin/users`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
     //NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_ADMINS(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/admin/users`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
     UPDATE_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}`;
     },
-    DELETE_USER_FROM_PROJECT(userId: number, projectId: number, deleteId: string): string {
+    DELETE_USER_FROM_PROJECT(userId: string, projectId: string, deleteId: string): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/users/${
-            encodeURIComponent(deleteId)
+            deleteId
         }`;
     },
     DELETE_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}`;
     },
     GET_IDEAS_FOR_PROJECT(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/ideas`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/ideas`;
     }
 };
 
 export const IDEA_ROUTES = {
     CREATE_IDEA(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${encodeURIComponent(userId)}/projects/${encodeURIComponent(projectId)}/ideas`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/ideas`;
     },
     UPDATE_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }`;
     },
     GET_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }`;
     },
     DELETE_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }`;
     },
     UPDATE_STATE(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/status`;
     },
     GET_COMMENTS_FOR_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+           ideaId
         }/comments`;
     }
 };
@@ -114,44 +113,44 @@ export const IDEA_ROUTES = {
 export const COMMENT_ROUTES = {
     CREATE_COMMENT(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/comments`;
     },
     DELETE_COMMENT(userId: number, projectId: number, ideaId: number, commentId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/comments/${
-            encodeURIComponent(commentId)
+            commentId
         }`;
     },
     UPDATE_COMMENT(userId: number, projectId: number, ideaId: number, commentId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/comments/${
-            encodeURIComponent(commentId)
+            commentId
         }`;
     },
     GET_COMMENT(userId: number, projectId: number, ideaId: number, commentId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/comments/${
-            encodeURIComponent(commentId)
+            commentId
         }`;
     },
 };
@@ -159,42 +158,42 @@ export const COMMENT_ROUTES = {
 export const VOTE_ROUTES = {
     VOTE_ON_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/votes`;
     },
     GET_VOTE_FOR_IDEA(userId: number, projectId: number, ideaId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/votes`;
     },
     UPDATE_VOTE_ON_IDEA(userId: number, projectId: number, ideaId: number, voteId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/votes/${
-            encodeURIComponent(voteId)
+            voteId
         }`;
     },
     DELETE_VOTE_ON_IDEA(userId: number, projectId: number, ideaId: number, voteId: number): string {
         return `${environment.apiURL}/users/${
-            encodeURIComponent(userId)
+            userId
         }/projects/${
-            encodeURIComponent(projectId)
+            projectId
         }/ideas/${
-            encodeURIComponent(ideaId)
+            ideaId
         }/votes/${
-            encodeURIComponent(voteId)
+            voteId
         }`;
     },
 };
