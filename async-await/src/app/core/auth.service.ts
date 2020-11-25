@@ -8,7 +8,7 @@ const TOKEN_KEY = 'presence';
 })
 export class AuthService {
   private _user?: any;
-  private headers = new HttpHeaders();
+  private _headers = new HttpHeaders();
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +18,10 @@ export class AuthService {
 
   get user() {
     return this._user;
+  }
+
+  get headers() {
+    return this._headers;
   }
 
   register(user: any): Promise<any> {
@@ -94,10 +98,6 @@ export class AuthService {
     localStorage.setItem(TOKEN_KEY, token);
   }
 
-  private retrieveToken() {
-    return localStorage.getItem(TOKEN_KEY);
-  }
-
   private deleteToken() {
     localStorage.removeItem(TOKEN_KEY);
   }
@@ -105,7 +105,7 @@ export class AuthService {
   private initHeaders() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token !== null) {
-      this.headers = new HttpHeaders().append('Authorization', `${token}`);
+      this._headers = new HttpHeaders().append('Authorization', `${token}`);
     }
   }
 }

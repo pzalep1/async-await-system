@@ -8,6 +8,7 @@ import { User } from 'src/entities/user.entity';
 import { IdeaController } from './ideas.controller';
 import { IdeaService } from './ideas.service';
 import { Comment } from '../entities/comment.entity';
+import { JwtStrategy } from 'src/jwt/jwt.strategy';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Project]),
@@ -18,6 +19,6 @@ import { Comment } from '../entities/comment.entity';
     TypeOrmModule.forFeature([Comment])
   ],
   controllers: [IdeaController],
-  providers: [IdeaService],
+  providers: [IdeaService, JwtStrategy],
 })
 export class IdeaModule {}

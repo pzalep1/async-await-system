@@ -5,6 +5,7 @@ import { Member } from 'src/entities/member.entity';
 import { Project } from 'src/entities/project.entity';
 import { User } from 'src/entities/user.entity';
 import { Vote } from 'src/entities/vote.entity';
+import { JwtStrategy } from 'src/jwt/jwt.strategy';
 import { VotesController } from './votes.controller';
 import { VotesService } from './votes.service';
 @Module({
@@ -16,6 +17,6 @@ import { VotesService } from './votes.service';
     TypeOrmModule.forFeature([Vote]),
   ],
   controllers: [VotesController],
-  providers: [VotesService]
+  providers: [VotesService, JwtStrategy]
 })
 export class VotesModule {}

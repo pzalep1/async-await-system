@@ -28,14 +28,14 @@ export const PROJECT_ROUTES = {
     ADD_USER_TO_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
-    //NEEDS TO BE WRITTEN INTO BACKEND
+    // NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_USERS(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
     ADD_ADMIN_USER_TO_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
-    //NEEDS TO BE WRITTEN INTO BACKEND
+    // NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_ADMINS(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
