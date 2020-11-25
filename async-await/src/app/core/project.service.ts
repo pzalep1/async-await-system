@@ -33,7 +33,7 @@ export class ProjectService {
   }
 
   createProject(userId: number, project: any) {
-    console.log(this.auth.headers);
+    console.log(this.auth);
     this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), { headers: this.auth.headers } ).subscribe(val => {
       console.log(val);
     });
