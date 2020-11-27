@@ -7,7 +7,7 @@ import { Administers } from 'src/entities/administers.entity';
 import { Member } from 'src/entities/member.entity';
 import { Idea } from 'src/entities/idea.entity';
 import { User } from 'src/entities/user.entity';
-import { JwtStrategy } from '../jwt/jwt.strategy';
+import { JwtStrategy } from 'src/jwt/jwt.strategy';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Project]),
@@ -15,6 +15,7 @@ import { JwtStrategy } from '../jwt/jwt.strategy';
     TypeOrmModule.forFeature([Member]),
     TypeOrmModule.forFeature([Idea]),
     TypeOrmModule.forFeature([User]),
+    JwtStrategy,
   ],
   controllers: [ProjectController],
   providers: [ProjectService, JwtStrategy],
