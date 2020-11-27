@@ -1,10 +1,11 @@
-import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Patch, Post, Body, UseGuards, Inject, Scope } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/jwt/jwt-auth.guard';
 import { ProjectService } from './projects.service';
-
-@Controller()
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
+@Controller({scope: Scope.REQUEST})
 export class ProjectController {
-  constructor(private readonly projectService: ProjectService) {}
+  constructor(private readonly projectService: ProjectService, @Inject(REQUEST) private readonly request: Request,) {}
 
   /**
    * Will retrieve all projects for a given user (Ones they administer and ones they are a member of)
