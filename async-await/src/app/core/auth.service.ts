@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { USER_ROUTES } from '../../environments/routes';
+import { IDEA_ROUTES, PROJECT_ROUTES, USER_ROUTES } from '../../environments/routes';
 
 const TOKEN_KEY = 'presence';
 @Injectable({
@@ -63,17 +63,34 @@ export class AuthService {
   checkToken() {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.get(USER_ROUTES.CHECK_TOKEN(), {
-        headers: this.headers,
-      })
-      .toPromise()
-      .then((res: any) => {
-        this.user = res;
-        resolve();
-      },
-      (err) => {
-        this.logout();
-        reject(err);
+      // console.log(this.headers);
+      // this.http.get(USER_ROUTES.CHECK_TOKEN(), {
+      //   headers: this.headers,
+      // })
+      // .toPromise()
+      // .then((res: any) => {
+      //   this.http.post(IDEA_ROUTES.CREATE_IDEA(1, 11), {
+      //     headers : this.headers
+      //   }).subscribe(val => {
+      //     console.log(val);
+      //   });
+      //   this.user = res;
+      //   //resolve();
+      // },
+      // (err) => {
+      //   this.logout();
+      //   reject(err);
+      // });
+      this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), {
+        headers : this.headers,
+        withCredentials: true
+      }).subscribe(val => {
+        console.log('nope', val);
+      });
+      this.http.get(PROJECT_ROUTES.CREATE_PROJECT(17), {
+        headers : this.headers
+      }).subscribe(val => {
+        console.log('nope', val);
       });
     });
   }
@@ -105,7 +122,8 @@ export class AuthService {
   private initHeaders() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token !== null) {
-      this._headers = new HttpHeaders().append('Authorization', `${token}`);
+      this._headers = new HttpHeaders().append('Authorization', `Bearer ${token}`);
+      console.log('user', this.headers);
     }
   }
 }

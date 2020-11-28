@@ -31,7 +31,8 @@ export class AppComponent {
     await this.project.getUsersProjects(this.auth.user.userId);
   }
 
-  async getProject() {
+  async getProjects() {
+    this.project.getUsersProjects(10);
 
   }
 

@@ -4,6 +4,7 @@ import { JwtAuthGuard } from "src/jwt/jwt-auth.guard";
 import { UserService } from "./users.service";
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
+import { AuthGuard } from "@nestjs/passport";
 @Controller({scope: Scope.REQUEST})
 export class UserController {
   constructor(
@@ -27,6 +28,34 @@ export class UserController {
     return this.userService.createUser(user);
   }
 
+  @Get('/users/:userId/projects')
+  @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
+  getProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
+    console.log("bl bl bl bl bbl")
+    // const userId = routeParameterDTO.userId;
+    // const name = projectWriteDTO.name;
+    // const description = projectWriteDTO.description;
+    // const color = projectWriteDTO.color;
+    // return this.projectService.createProject(userId,name,description,color);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Post('/users/:userId/projects')
+  @HttpCode(201)
+  createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
+    console.log('follower')
+    const use = this.request.headers;
+    const user = this.request.user;
+    console.log('user', user);
+    console.log(use);
+    // const userId = routeParameterDTO.userId;
+    // const name = projectWriteDTO.name;
+    // const description = projectWriteDTO.description;
+    // const color = projectWriteDTO.color;
+    // return this.projectService.createProject(userId,name,description,color);
+  }
+
   /**
    * Will log in a user
    */
@@ -44,6 +73,7 @@ export class UserController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   checkToken() {
+    console.log('reqs')
     const requester = this.request.user;
     return requester;
   }

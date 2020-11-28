@@ -16,7 +16,8 @@ import { JwtStrategy } from 'src/jwt/jwt.strategy';
     TypeOrmModule.forFeature([Member]),
     TypeOrmModule.forFeature([Idea]),
     TypeOrmModule.forFeature([User]),
-    TypeOrmModule.forFeature([Comment])
+    TypeOrmModule.forFeature([Comment]),
+    JwtStrategy
   ],
   controllers: [IdeaController],
   providers: [IdeaService, JwtStrategy],

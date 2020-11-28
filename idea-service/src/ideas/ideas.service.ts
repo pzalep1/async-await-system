@@ -22,6 +22,9 @@ export class IdeaService {
   async createIdea(userId: number, projectId: number, idea: string): Promise<any> {
     const user = await this.userRepository.findOne({userId});
     if (user) {
+      if (!idea) {
+        throw new HttpException('Idea must be defined', HttpStatus.BAD_REQUEST);
+      }
       const project = await this.projectRepository.findOne({projectId});
       if (project) {
         const timestamp = Date.now().toString();

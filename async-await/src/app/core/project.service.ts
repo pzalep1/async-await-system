@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PROJECT_ROUTES, USER_ROUTES } from '../../environments/routes';
+import { IDEA_ROUTES, PROJECT_ROUTES, USER_ROUTES } from '../../environments/routes';
 import { AuthService } from './auth.service';
 
 const TOKEN_KEY = 'presence';
@@ -9,19 +9,22 @@ const TOKEN_KEY = 'presence';
 })
 export class ProjectService {
 
-  private headers = new HttpHeaders();
+  private headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: localStorage.getItem(TOKEN_KEY),
+  });
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
   getUsersProjects(userId: number) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.get(PROJECT_ROUTES.GET_USERS_PROJECTS(userId), {
-        headers: this.auth.headers
+      this.http.post(PROJECT_ROUTES.GET_USERS_PROJECTS(userId), {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
-        console.log(res);
+        console.log('res', res);
       });
     });
   }
@@ -33,9 +36,11 @@ export class ProjectService {
   }
 
   createProject(userId: number, project: any) {
-    console.log(this.auth);
-    this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), { headers: this.auth.headers } ).subscribe(val => {
-      console.log(val);
+    console.log('heads', this.headers);
+    this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), {
+      headers : this.headers
+    }).subscribe(val => {
+      console.log('nope', val);
     });
     // PROJECT_ROUTES.CREATE_PROJECT(userId)
   }
@@ -84,13 +89,10 @@ export class ProjectService {
 
   private initHeaders() {
     const token = localStorage.getItem(TOKEN_KEY);
-    console.log(token);
     if (token !== null) {
-      console.log('setting')
-      this.headers.append('Authorization', `${token}`);
-      this.headers.append('not', 'not');
-      console.log(this.auth.headers);
-      console.log('this.headers', this.headers.get('Authorization'));
+      console.log('otke', token);
+      this.headers = new HttpHeaders().append('Authorization', `Bearer ${token}`);
+      console.log('nope', this.headers.get('Authorization'));
     }
   }
 }

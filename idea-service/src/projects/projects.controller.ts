@@ -10,15 +10,15 @@ export class ProjectController {
   /**
    * Will retrieve all projects for a given user (Ones they administer and ones they are a member of)
    */
-  @Get('/users/:userId/projects')
-  @HttpCode(200)
-  // @UseGuards(JwtAuthGuard)
-  async getProjects(@Param() routeParameterDTO: any): Promise<any> {
-    const userId = routeParameterDTO.userId;
-    const userProjects = await this.projectService.getUserProjects(userId);
-    const adminProjects = await this.projectService.getAdminProjects(userId);
-    return { member: userProjects, administers: adminProjects };
-  }
+  // @Get('/users/:userId/projects')
+  // @HttpCode(200)
+  // // @UseGuards(JwtAuthGuard)
+  // async getProjects(@Param() routeParameterDTO: any): Promise<any> {
+  //   const userId = routeParameterDTO.userId;
+  //   const userProjects = await this.projectService.getUserProjects(userId);
+  //   const adminProjects = await this.projectService.getAdminProjects(userId);
+  //   return { member: userProjects, administers: adminProjects };
+  // }
   /*
   * Will retrieve a specific project for a user
   */
@@ -32,16 +32,20 @@ export class ProjectController {
   /*
   * Will create a project for a given user
   */
-  @Post('/users/:userId/projects')
-  @HttpCode(201)
-  @UseGuards(JwtAuthGuard)
-  createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
-    const userId = routeParameterDTO.userId;
-    const name = projectWriteDTO.name;
-    const description = projectWriteDTO.description;
-    const color = projectWriteDTO.color;
-    return this.projectService.createProject(userId,name,description,color);
-  }
+  // @Post('/users/:userId/projects')
+  // @HttpCode(201)
+  // @UseGuards(JwtAuthGuard)
+  // createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
+  //   const use = this.request.headers;
+  //   const user = this.request.user;
+  //   console.log('user', user);
+  //   console.log(use);
+  //   // const userId = routeParameterDTO.userId;
+  //   // const name = projectWriteDTO.name;
+  //   // const description = projectWriteDTO.description;
+  //   // const color = projectWriteDTO.color;
+  //   // return this.projectService.createProject(userId,name,description,color);
+  // }
   /*
   * Will add a user to a project
   */
