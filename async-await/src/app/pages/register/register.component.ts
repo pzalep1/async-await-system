@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
         lName: this.lastName,
         email: this.email,
         password: this.password
-      }).then((val) => {
+      }).then(() => {
         this.router.navigate(['/login']);
       }).catch(err => {
         if (err.status === 409) {
