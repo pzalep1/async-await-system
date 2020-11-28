@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/users', this.user.userId, 'projects']);
       })
       .catch(err => {
-        console.log(err.status);
         if (err.status === 401) {
           this.passwordError = true;
         }

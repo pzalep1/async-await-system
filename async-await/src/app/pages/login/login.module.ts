@@ -15,6 +15,6 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule
   ],
-  providers: [{provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
+  providers: [],
 })
 export class LoginModule { }
