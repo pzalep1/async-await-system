@@ -19,12 +19,13 @@ export class ProjectService {
   getUsersProjects(userId: number) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(PROJECT_ROUTES.GET_USERS_PROJECTS(userId), {
+      this.http.get(PROJECT_ROUTES.GET_USERS_PROJECTS(userId), {
         headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
         console.log('res', res);
+        resolve(res);
       });
     });
   }
@@ -90,9 +91,7 @@ export class ProjectService {
   private initHeaders() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token !== null) {
-      console.log('otke', token);
       this.headers = new HttpHeaders().append('Authorization', `Bearer ${token}`);
-      console.log('nope', this.headers.get('Authorization'));
     }
   }
 }

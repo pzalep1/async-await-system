@@ -64,34 +64,20 @@ export class AuthService {
   checkToken() {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      // console.log(this.headers);
-      // this.http.get(USER_ROUTES.CHECK_TOKEN(), {
-      //   headers: this.headers,
-      // })
-      // .toPromise()
-      // .then((res: any) => {
-      //   this.http.post(IDEA_ROUTES.CREATE_IDEA(1, 11), {
-      //     headers : this.headers
-      //   }).subscribe(val => {
-      //     console.log(val);
-      //   });
-      //   this.user = res;
-      //   //resolve();
-      // },
-      // (err) => {
-      //   this.logout();
-      //   reject(err);
-      // });
-      this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), {
-        headers : this.headers,
-        withCredentials: true
-      }).subscribe(val => {
-        console.log('nope', val);
-      });
-      this.http.get(PROJECT_ROUTES.CREATE_PROJECT(17), {
-        headers : this.headers
-      }).subscribe(val => {
-        console.log('nope', val);
+      console.log(this.headers);
+      this.http.get(USER_ROUTES.CHECK_TOKEN(), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        console.log(res);
+        this.user = res;
+        console.log(this.user);
+        resolve();
+      },
+      (err) => {
+        this.logout();
+        reject(err);
       });
     });
   }

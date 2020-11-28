@@ -28,19 +28,7 @@ export class UserController {
     return this.userService.createUser(user);
   }
 
-  @Get('/users/:userId/projects')
-  @HttpCode(201)
-  @UseGuards(JwtAuthGuard)
-  getProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
-    console.log("bl bl bl bl bbl")
-    // const userId = routeParameterDTO.userId;
-    // const name = projectWriteDTO.name;
-    // const description = projectWriteDTO.description;
-    // const color = projectWriteDTO.color;
-    // return this.projectService.createProject(userId,name,description,color);
-  }
-
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('/users/:userId/projects')
   @HttpCode(201)
   createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {

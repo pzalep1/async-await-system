@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private auth: AuthService, private project: ProjectService) {}
 
   async ngOnInit() {
-
+    await this.auth.checkToken();
   }
 
   async login() {

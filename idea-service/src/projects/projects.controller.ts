@@ -10,21 +10,21 @@ export class ProjectController {
   /**
    * Will retrieve all projects for a given user (Ones they administer and ones they are a member of)
    */
-  // @Get('/users/:userId/projects')
-  // @HttpCode(200)
-  // // @UseGuards(JwtAuthGuard)
-  // async getProjects(@Param() routeParameterDTO: any): Promise<any> {
-  //   const userId = routeParameterDTO.userId;
-  //   const userProjects = await this.projectService.getUserProjects(userId);
-  //   const adminProjects = await this.projectService.getAdminProjects(userId);
-  //   return { member: userProjects, administers: adminProjects };
-  // }
+  @Get('/users/:userId/projects')
+  @HttpCode(200)
+  @UseGuards(JwtAuthGuard)
+  async getProjects(@Param() routeParameterDTO: any): Promise<any> {
+    const userId = routeParameterDTO.userId;
+    const userProjects = await this.projectService.getUserProjects(userId);
+    const adminProjects = await this.projectService.getAdminProjects(userId);
+    return { member: userProjects, administers: adminProjects };
+  }
   /*
   * Will retrieve a specific project for a user
   */
   @Get('/users/:userId/projects/:projectId')
   @HttpCode(200)
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   getProject(@Param() routeParameterDTO: any): any {
       const projectId = routeParameterDTO.projectId;
       return this.projectService.getProject(projectId);
