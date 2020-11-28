@@ -47,9 +47,10 @@ export class AuthService {
         authUser = res.found;
         this.user = authUser;
         this.storeToken(res.token);
-        resolve();
+        resolve(this.user);
       },
       (err) => {
+        console.log(err);
         reject(err);
       });
     });

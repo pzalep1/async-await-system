@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -9,6 +11,10 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     CommonModule,
     MatInputModule,
     MatFormFieldModule,
-  ]
+    MatButtonModule,
+    FormsModule,
+    RouterModule
+  ],
+  providers: [{provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}],
 })
 export class LoginModule { }
