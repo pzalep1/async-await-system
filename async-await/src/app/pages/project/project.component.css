@@ -1,0 +1,72 @@
+.wrapper {
+    padding: 20px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.top {
+    height: 200px;
+    display: inline-block;
+}
+
+.page-title {
+    display: inline-block;
+}
+.create {
+    float: right;
+    background-color: #5431F2;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card {
+    width: 250px;
+    margin: 15px;
+    padding: 0px;
+    border-radius: 4px 4px;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #2F322F;
+}
+
+h1 {
+    font-weight: 200;
+    color: #2F322F;
+}
+
+h2 {
+    font-weight: 200;
+    color: #2F322F;
+    margin: 20px;
+}
+
+h3 {
+    color: #2F322F;
+    font-weight: 300;
+}
+
+.top {
+    height: 30px;
+    width: 100%;
+    border-radius: 4px 4px 0px 0px;
+}
+
+.inner {
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+.trash {
+    float: right;
+    margin: 0;
+    right: 10px;
+    bottom: 10px;
+
+}
