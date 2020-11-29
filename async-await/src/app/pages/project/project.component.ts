@@ -31,13 +31,6 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  createProject() {
-    const project = {name: 'Example Project', description: 'This is just a project', color: '#fe36c0'};
-    this.project.createProject(this.user.userId, this.newProject).then(async () => {
-      this.projects = await this.project.getUsersProjects(this.user.userId);
-    });
-  }
-
   openDialog(): void {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(ProjectBuilder, {
@@ -46,8 +39,12 @@ export class ProjectComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.project = result;
-      console.log(this.project);
+      this.newProject = result;
+      if (result && result.name && result.description && result.color) {
+        this.project.createProject(this.user.userId, this.newProject).then(async () => {
+          this.projects = await this.project.getUsersProjects(this.user.userId);
+        });
+      }
     });
   }
 

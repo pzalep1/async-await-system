@@ -8,8 +8,18 @@
     <mat-label>Project Description</mat-label>
     <textarea matInput [(ngModel)]="data.description"></textarea>
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select a color</mat-label>
+    <mat-select [(value)]="data.color">
+        <mat-option value="#fe36c0">Pink</mat-option>
+        <mat-option value="#1c70dd">Blue</mat-option>
+        <mat-option value="#7FFF00">Green</mat-option>
+        <mat-option value="#DC143C">Red</mat-option>
+        <mat-option value="#800080">Purple</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Create Project</button>
 </div>
