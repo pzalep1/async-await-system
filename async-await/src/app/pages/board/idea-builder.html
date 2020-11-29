@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Create New Idea</h1>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Idea</mat-label>
+    <textarea matInput [(ngModel)]="data.idea"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit Idea</button>
+</div>

@@ -14,7 +14,6 @@ export class IdeaController {
    * Will create an Idea
    */
   @Post('/users/:userId/projects/:projectId/ideas')
-  @HttpCode(201)
   createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -26,7 +25,6 @@ export class IdeaController {
   */
  @Patch('/users/:userId/projects/:projectId/ideas/:ideaId')
  @HttpCode(201)
- @UseGuards(JwtAuthGuard)
  updateIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any):any{
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -39,7 +37,6 @@ export class IdeaController {
  */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId')
   @HttpCode(200)
-  @UseGuards(JwtAuthGuard)
   getIdea(@Param() routeParameterDTO: any): any{
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -51,9 +48,9 @@ export class IdeaController {
   */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/status')
   @HttpCode(201)
-  @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
     const requester = this.request.user;
+    console.log(requester);
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
     const ideaId = routeParameterDTO.ideaId;
@@ -65,7 +62,6 @@ export class IdeaController {
   */
   @Delete('/users/:userId/projects/:projectId/ideas/:ideaId')
   @HttpCode(200)
-  @UseGuards(JwtAuthGuard)
   deleteIdea(@Param() routeParameterDTO: any): any{
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -77,7 +73,6 @@ export class IdeaController {
   */
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/comments')
   @HttpCode(200)
-  @UseGuards(JwtAuthGuard)
   getComments(@Param() routeParameterDTO: any): any{
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;

@@ -49,27 +49,69 @@ export class IdeaService {
     });
   }
 
-  updateIdea(userId: number, projectId: number, ideaUpdates: any) {
+  updateIdea(userId: number, projectId: number, ideaId: number, ideaUpdates: any) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.patch(IDEA_ROUTES.UPDATE_IDEA(userId, projectId, ideaId), {
+        headers: this.headers,
+        ideaUpdates
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   getIdea(userId: number, projectId: number, ideaId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.get(IDEA_ROUTES.GET_IDEA(userId, projectId, ideaId), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   deleteIdea(userId: number, projectId: number, ideaId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.delete(IDEA_ROUTES.DELETE_IDEA(userId, projectId, ideaId), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   updateState(userId: number, projectId: number, ideaId: number, state: any) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.post(IDEA_ROUTES.UPDATE_STATE(userId, projectId, ideaId), {
+        headers: this.headers,
+        newState: state
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
   private initHeaders() {

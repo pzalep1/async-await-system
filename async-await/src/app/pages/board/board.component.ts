@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../core/project.service';
 import { IdeaService } from '../../core/idea.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface DialogData {
+  idea: string;
+}
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -44,14 +48,50 @@ export class BoardComponent implements OnInit {
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
+      console.log(event.container.id);
       // TODO: Update the status of the idea
     }
   }
 
   createIdea() {
-    this.ideaService.createIdea(this.userId, this.projectId, this.newIdea);
+    this.ideaService.createIdea(this.userId, this.projectId, this.newIdea).then(async () => {
+      this.submittedIdeas = await this.ideaService.getIdeasForAProject(this.userId, this.projectId);
+    });
   }
-  deleteIdea() {
-    
+  deleteIdea(ideaId: any) {
+    this.ideaService.deleteIdea(this.userId, this.projectId, ideaId).then(async () => {
+      this.submittedIdeas = await this.ideaService.getIdeasForAProject(this.userId, this.projectId);
+    });
   }
+
+  openDialog(): void {
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(IdeaBuilder, {
+      width: '500px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.newIdea = result.idea;
+      this.createIdea();
+    });
+  }
+}
+
+
+@Component({
+  selector: 'idea-builder',
+  templateUrl: 'idea-builder.html',
+  styleUrls: ['./board.component.css']
+})
+export class IdeaBuilder {
+
+  constructor(
+    public dialogRef: MatDialogRef<IdeaBuilder>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
