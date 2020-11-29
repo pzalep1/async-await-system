@@ -23,11 +23,13 @@
     <h2>Projects</h2>
     <div class="flex-container">
       <mat-card class="card" *ngFor="let project of projects?.member">
-        <div class="top" [style.background]="project?.color"></div>
-        <div class="inner">
-          <h3>{{ project?.name }}</h3>
-          <p>{{ project?.description }}</p>
-        </div>
+        <a class="card-link" [routerLink]= "['/users', user.userId, 'projects', project?.projectId]">
+          <div class="top" [style.background]="project?.color"></div>
+          <div class="inner">
+            <h3>{{ project?.name }}</h3>
+            <p>{{ project?.description }}</p>
+          </div>
+        </a>
       </mat-card>
     </div>
   </div>

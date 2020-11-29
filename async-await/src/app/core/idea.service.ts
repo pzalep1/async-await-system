@@ -33,7 +33,18 @@ export class IdeaService {
 
   createIdea(userId: number, projectId: number, idea: any) {
     return new Promise((resolve, reject) => {
-      
+      this.initHeaders();
+      this.http.post(IDEA_ROUTES.CREATE_IDEA(userId, projectId), {
+        headers: this.headers,
+        idea
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 

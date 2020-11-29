@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { AuthService } from 'src/app/core/auth.service';
-import { ProjectService } from 'src/app/core/project.service';
+import { AuthService } from '../../core/auth.service';
+import { ProjectService } from '../../core/project.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 export interface DialogData {

@@ -12,6 +12,7 @@ import {
   MatSelectModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [BoardComponent],
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatInputModule,
     MatSelectModule,
+    DragDropModule,
   ]
 })
 export class BoardModule { }
