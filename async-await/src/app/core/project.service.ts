@@ -24,67 +24,158 @@ export class ProjectService {
       })
       .toPromise()
       .then((res: any) => {
-        console.log('res', res);
         resolve(res);
+      },
+      (err) => {
+        reject(err);
       });
     });
   }
 
   getProject(userId: number, projectId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.get(PROJECT_ROUTES.GET_PROJECT(userId, projectId), {
+        headers: this.headers
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   createProject(userId: number, project: any) {
-    console.log('heads', this.headers);
-    this.http.post(PROJECT_ROUTES.CREATE_PROJECT(17), {
-      headers : this.headers
-    }).subscribe(val => {
-      console.log('nope', val);
+    return new Promise((resolve, reject) => {
+      this.initHeaders();
+      this.http.post(PROJECT_ROUTES.CREATE_PROJECT(userId), {
+        headers: this.headers,
+        project
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
-    // PROJECT_ROUTES.CREATE_PROJECT(userId)
   }
 
   addUserToProject(userId: number, projectId: number, newUserId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), {
+        headers: this.headers,
+        userId: newUserId
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   getUsersForProject(userId: number, projectId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.get(PROJECT_ROUTES.GET_PROJECT_USERS(userId, projectId), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   addAdminToProject(userId: number, projectId: number, newAdminId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), {
+        headers: this.headers,
+        userId: newAdminId
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   getAdminsForProject(userId: number, projectId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.get(PROJECT_ROUTES.GET_PROJECT_ADMINS(userId, projectId), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   updateProject(userId: number, projectId: number, updates: any) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.patch(PROJECT_ROUTES.UPDATE_PROJECT(userId, projectId), {
+        headers: this.headers,
+        name: updates.name,
+        description: updates.description,
+        color: updates.color
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   removeUserFromProject(userId: number, projectId: number, removeUserId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.delete(PROJECT_ROUTES.DELETE_USER_FROM_PROJECT(userId, projectId, removeUserId), {
+        headers: this.headers,
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
   deleteProject(userId: number, projectId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.delete(PROJECT_ROUTES.DELETE_PROJECT(userId, projectId), {
+        headers: this.headers
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      });
     });
   }
 

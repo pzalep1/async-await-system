@@ -2,9 +2,6 @@
     padding: 20px;
 }
 
-.lists {
-    
-}
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -31,7 +28,12 @@
     width: 250px;
     margin: 15px;
     padding: 0px;
-    border-radius: 4px 4px 0px 0px;
+    border-radius: 4px 4px;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #2F322F;
 }
 
 h1 {
@@ -51,12 +53,20 @@ h3 {
 }
 
 .top {
-    height: 15px;
+    height: 30px;
     width: 100%;
-    border-radius: inherit;
+    border-radius: 4px 4px 0px 0px;
 }
 
 .inner {
     margin: 10px;
     padding-bottom: 20px;
+}
+
+.trash {
+    float: right;
+    margin: 0;
+    right: 10px;
+    bottom: 10px;
+
 }

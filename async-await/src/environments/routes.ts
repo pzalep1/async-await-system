@@ -28,21 +28,19 @@ export const PROJECT_ROUTES = {
     ADD_USER_TO_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
-    // NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_USERS(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/users`;
     },
     ADD_ADMIN_USER_TO_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
-    // NEEDS TO BE WRITTEN INTO BACKEND
     GET_PROJECT_ADMINS(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
     UPDATE_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}`;
     },
-    DELETE_USER_FROM_PROJECT(userId: string, projectId: string, deleteId: string): string {
+    DELETE_USER_FROM_PROJECT(userId: number, projectId: number, deleteId: number): string {
         return `${environment.apiURL}/users/${
             userId
         }/projects/${

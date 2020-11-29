@@ -26,7 +26,6 @@ export class AuthService {
 
   register(user: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      let authUser = {};
       this.http.post(USER_ROUTES.CREATE_USER(), {user: user})
       .toPromise()
       .then((res: any) => {
@@ -50,7 +49,6 @@ export class AuthService {
         resolve(this.user);
       },
       (err) => {
-        console.log(err);
         reject(err);
       });
     });
@@ -64,15 +62,12 @@ export class AuthService {
   checkToken() {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      console.log(this.headers);
       this.http.get(USER_ROUTES.CHECK_TOKEN(), {
         headers: this.headers,
       })
       .toPromise()
       .then((res: any) => {
-        console.log(res);
         this.user = res;
-        console.log(this.user);
         resolve();
       },
       (err) => {
@@ -110,7 +105,6 @@ export class AuthService {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token !== null) {
       this._headers = new HttpHeaders().append('Authorization', `Bearer ${token}`);
-      console.log('user', this.headers);
     }
   }
 }

@@ -28,22 +28,6 @@ export class UserController {
     return this.userService.createUser(user);
   }
 
-  // @UseGuards(AuthGuard('jwt'))
-  @Post('/users/:userId/projects')
-  @HttpCode(201)
-  createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
-    console.log('follower')
-    const use = this.request.headers;
-    const user = this.request.user;
-    console.log('user', user);
-    console.log(use);
-    // const userId = routeParameterDTO.userId;
-    // const name = projectWriteDTO.name;
-    // const description = projectWriteDTO.description;
-    // const color = projectWriteDTO.color;
-    // return this.projectService.createProject(userId,name,description,color);
-  }
-
   /**
    * Will log in a user
    */

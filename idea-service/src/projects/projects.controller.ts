@@ -32,26 +32,20 @@ export class ProjectController {
   /*
   * Will create a project for a given user
   */
-  // @Post('/users/:userId/projects')
-  // @HttpCode(201)
-  // @UseGuards(JwtAuthGuard)
-  // createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
-  //   const use = this.request.headers;
-  //   const user = this.request.user;
-  //   console.log('user', user);
-  //   console.log(use);
-  //   // const userId = routeParameterDTO.userId;
-  //   // const name = projectWriteDTO.name;
-  //   // const description = projectWriteDTO.description;
-  //   // const color = projectWriteDTO.color;
-  //   // return this.projectService.createProject(userId,name,description,color);
-  // }
+  @Post('/users/:userId/projects')
+  @HttpCode(201)
+  createProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
+    const userId = routeParameterDTO.userId;
+    const name = projectWriteDTO.project.name;
+    const description = projectWriteDTO.project.description;
+    const color = projectWriteDTO.project.color;
+    return this.projectService.createProject(userId,name,description,color);
+  }
   /*
   * Will add a user to a project
   */
   @Post('/users/:userId/projects/:projectId/users')
   @HttpCode(201)
-  //@UseGuards(JwtAuthGuard)
   addUserToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
     const userId = projectWriteDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -62,7 +56,6 @@ export class ProjectController {
   */
  @Post('/users/:userId/projects/:projectId/admin/users')
  @HttpCode(201)
- //@UseGuards(JwtAuthGuard)
  addAdminToProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
     const userId = projectWriteDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -73,7 +66,6 @@ export class ProjectController {
   */
  @Patch('/users/:userId/projects/:projectId')
  @HttpCode(200)
- //@UseGuards(JwtAuthGuard)
  updateProject(@Param() routeParameterDTO: any, @Body() projectWriteDTO: any): any {
     const projectId = routeParameterDTO.projectId;
     const name = projectWriteDTO.name;
@@ -86,7 +78,6 @@ export class ProjectController {
  */
  @Delete('/users/:userId/projects/:projectId/users/:userId')
  @HttpCode(200)
- //@UseGuards(JwtAuthGuard)
  deleteUserFromProject(@Param() routeParameterDTO: any): any {
   const userId = routeParameterDTO.userId;
   const projectId = routeParameterDTO.projectId;
@@ -97,7 +88,6 @@ export class ProjectController {
  */
  @Get('/users/:userId/projects/:projectId/ideas')
  @HttpCode(200)
- //@UseGuards(JwtAuthGuard)
  getAllIdeasForProject(@Param() routeParameterDTO: any): any {
     const projectId = routeParameterDTO.projectId;
     return this.projectService.getAllIdeasForProject(projectId);
@@ -107,9 +97,26 @@ export class ProjectController {
   */
   @Delete('/users/:userId/projects/:projectId')
   @HttpCode(200)
-  //@UseGuards(JwtAuthGuard)
   deleteProject(@Param() routeParameterDTO: any): any {
     const projectId = routeParameterDTO.projectId;
     return this.projectService.deleteProject(projectId);
+  }
+  /**
+   * Will get the users for a project
+   */
+  @Get('/users/:userId/projects/:projectId/users')
+  @HttpCode(200)
+  getUsersForProject(@Param() routeParameterDTO: any): any {
+    const projectId = routeParameterDTO.projectId;
+    return this.projectService.getUsersForProject(projectId);
+  }
+  /**
+   * Will get the admins for a project
+   */
+  @Get('/users/:userId/projects/:projectId/users/admins')
+  @HttpCode(200)
+  getAdminsForProject(@Param() routeParameterDTO: any): any {
+    const projectId = routeParameterDTO.projectId;
+    return this.projectService.getAdminsForProject(projectId);
   }
 }

@@ -155,11 +155,31 @@ export class ProjectService {
    * @param projectId The projectId of the project to get deleted
    */
   async deleteProject(projectId: number): Promise<any> {
+    // TO DO ADD AUTHORIZATIONS
     const project = await this.projectRepository.findOne(projectId);
     if (project) {
       this.projectRepository.delete(projectId);
       this.memberRepository.delete({projectId: projectId});
       this.adminRepository.delete({projectId: projectId});
+    } else {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async getUsersForProject(projectId: number): Promise<any> {
+    const project = await this.projectRepository.findOne(projectId);
+    if (project) {
+      return await this.memberRepository.find({projectId: projectId});
+    } else {
+      throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async getAdminsForProject(projectId: number): Promise<any> {
+    const project = await this.projectRepository.findOne(projectId);
+    if (project) {
+      const users = await this.adminRepository.find({projectId: projectId});
+      return users;
     } else {
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }
