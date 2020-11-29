@@ -1,0 +1,30 @@
+export declare class SqlDriver {
+    createUser(): void;
+    updateUser(userId: string): void;
+    deleteUser(userId: string): void;
+    getUser(): void;
+    getProject(userId: string, projectId: string): void;
+    createProject(userId: string, name: string, description: string, color: string): void;
+    addUserToProject(userId: string, projectId: string): void;
+    updateProject(userId: string, projectId: string, name: string, description: string, color: string): void;
+    addAdminToProject(userId: string, projectId: string): void;
+    deleteUsersFromProject(userId: string, projectId: string): void;
+    getAllIdeasForProject(projectId: string): void;
+    deleteProject(userId: string, projectId: string): void;
+    getAllProjectsForAdmin(userId: string): void;
+    getAllProjectsForUser(userId: string): void;
+    createIdea(userId: string, projectId: string, idea: string, timestamp: string): void;
+    updateIdea(userId: string, projectId: string, idea: string, timestamp: string): void;
+    getIdea(userId: string, projectId: string, ideaId: string): void;
+    changeStateOfIdea(projectId: string, ideaId: string, newState: string): void;
+    deleteIdea(projectId: string, ideaId: string): void;
+    getCommentsForIdea(projectId: string, ideaId: string): void;
+    createComment(userId: string, projectId: string, ideaId: string, comment: string): void;
+    deleteComment(userId: string, projectId: string, ideaId: string): void;
+    updateComment(userId: string, projectId: string, ideaId: string, comment: string): void;
+    getComment(userId: string, projectId: string, ideaId: string, comment: string): void;
+    addVote(userId: string, vote: boolean): void;
+    deleteVote(userId: string, projectId: string, ideaId: string, voteId: string): void;
+    updateVote(userId: string, projectId: string, ideaId: string, voteId: string, vote: boolean): void;
+    getVotesForIdea(projectId: string, ideaId: string): void;
+}
