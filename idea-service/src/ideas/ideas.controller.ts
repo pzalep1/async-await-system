@@ -15,7 +15,6 @@ export class IdeaController {
    */
   @Post('/users/:userId/projects/:projectId/ideas')
   @HttpCode(201)
-  @UseGuards(JwtAuthGuard)
   createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;

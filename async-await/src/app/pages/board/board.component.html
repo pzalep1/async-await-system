@@ -1,58 +1,58 @@
-<p>
-  {{project.name}}
-</p>
-<p>{{ project.description }}</p>
 <div class="top" [style.background]="project.color"></div>
-
-
-
-
-<div cdkDropListGroup>
-  <div class="example-container">
-    <h2>To do</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="submittedIdeas"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of submittedIdeas" cdkDrag>{{item.idea}}</div>
+<div class="board">
+  <div class="header">
+    <h1>{{project.name}}</h1>
+    <p>{{ project.description }}</p>
+  </div>
+  <button mat-raised-button class="create" (click)="openDialog()">Create Idea</button>
+  <div cdkDropListGroup>
+    <div class="example-container">
+      <h2>To do</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="submittedIdeas"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of submittedIdeas" cdkDrag>{{item.idea}}</div>
+      </div>
+    </div>
+  
+    <div class="example-container">
+      <h2>Review</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="reviewIdeas"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of reviewIdeas" cdkDrag>{{item.idea}}</div>
+      </div>
+    </div>
+  
+    <div class="example-container">
+      <h2>Accepted</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="acceptedIdeas"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of acceptedIdeas" cdkDrag>{{item.idea}}</div>
+      </div>
+    </div>
+  
+    <div class="example-container">
+      <h2>Rejected</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="rejectedIdeas"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of rejectedIdeas" cdkDrag>{{item.idea}}</div>
+      </div>
     </div>
   </div>
 
-  <div class="example-container">
-    <h2>Review</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="reviewIdeas"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of reviewIdeas" cdkDrag>{{item.idea}}</div>
-    </div>
-  </div>
-
-  <div class="example-container">
-    <h2>Accepted</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="acceptedIdeas"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of acceptedIdeas" cdkDrag>{{item.idea}}</div>
-    </div>
-  </div>
-
-  <div class="example-container">
-    <h2>Rejected</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="rejectedIdeas"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of rejectedIdeas" cdkDrag>{{item.idea}}</div>
-    </div>
-  </div>
 </div>

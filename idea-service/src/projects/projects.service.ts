@@ -145,7 +145,8 @@ export class ProjectService {
   async getAllIdeasForProject(projectId: number): Promise<any> {
     const project = await this.projectRepository.findOne(projectId);
     if (project) {
-      return await this.ideaRepository.createQueryBuilder('Idea').where('projectId = :projectId', { projectId: projectId }).getMany();
+      const ideas = await this.ideaRepository.createQueryBuilder('Idea').where('projectId = :projectId', { projectId: projectId }).getMany();
+      return ideas;
     } else {
       throw new HttpException('Project not found', HttpStatus.NOT_FOUND);
     }

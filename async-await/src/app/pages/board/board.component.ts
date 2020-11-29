@@ -13,7 +13,8 @@ export class BoardComponent implements OnInit {
   projectId: any;
   userId: any;
   project: any;
-  submittedIdeas: any[];
+  newIdea: any;
+  submittedIdeas: any;
   reviewIdeas: any[] = [];
   acceptedIdeas: any[] = [];
   rejectedIdeas: any [] = [];
@@ -47,4 +48,10 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  createIdea() {
+    this.ideaService.createIdea(this.userId, this.projectId, this.newIdea);
+  }
+  deleteIdea() {
+    
+  }
 }

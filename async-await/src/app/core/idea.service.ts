@@ -23,6 +23,7 @@ export class IdeaService {
       })
       .toPromise()
       .then((res: any) => {
+        console.log(res);
         resolve(res);
       },
       (err) => {
