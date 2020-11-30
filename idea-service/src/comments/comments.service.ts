@@ -6,6 +6,7 @@ import { Project } from 'src/entities/project.entity';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Comment } from 'src/entities/comment.entity';
+import { Administers } from 'src/entities/administers.entity';
 
 
 @Injectable()
@@ -13,6 +14,7 @@ export class CommentService {
   constructor(
     @InjectRepository(Project) private projectRepository: Repository<Project>,
     @InjectRepository(Member) private memberRepository: Repository<Member>,
+    @InjectRepository(Administers) private adminRepository: Repository<Administers>,
     @InjectRepository(Idea) private ideaRepository: Repository<Idea>,
     @InjectRepository(User) private userRepository: Repository<User>,
     @InjectRepository(Comment) private commentRepository: Repository<Comment>,
@@ -22,11 +24,12 @@ export class CommentService {
     const user = await this.userRepository.findOne({userId});
     if (user) {
       const project = await this.projectRepository.findOne({projectId});
+      const userAdminAuthorized = await this.adminRepository.findOne({userId: requester.userId, projectId})
       const userAuthorized = await this.memberRepository.findOne({userId: requester.userId, projectId});
-      if (project && userAuthorized) {
+      if (project && (userAuthorized || userAdminAuthorized)) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
-          return this.commentRepository.insert({userId, ideaId, comment});
+          return this.commentRepository.insert({userId, ideaId, comment, timestamp: Date.now().toString()});
         } else {
           throw new HttpException('Idea not found', HttpStatus.NOT_FOUND);
         }

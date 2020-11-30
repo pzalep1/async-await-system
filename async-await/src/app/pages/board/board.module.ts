@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoardComponent, IdeaBuilder } from './board.component';
+import { BoardComponent, CommentBuilder, IdeaBuilder } from './board.component';
 import { FormsModule } from '@angular/forms';
 import {
   MatCardModule,
@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
-  declarations: [BoardComponent, IdeaBuilder],
+  declarations: [BoardComponent, IdeaBuilder, CommentBuilder],
   imports: [
     CommonModule,
     MatCardModule,
@@ -29,6 +29,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSelectModule,
     DragDropModule,
   ],
-  entryComponents: [BoardComponent, IdeaBuilder]
+  entryComponents: [BoardComponent, IdeaBuilder, CommentBuilder]
 })
 export class BoardModule { }

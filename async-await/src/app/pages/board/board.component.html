@@ -17,7 +17,6 @@
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of ideas.submitted" cdkDrag>
           {{item?.idea}}
-          <button mat-raised-button class="create" (click)="openDialog()">Add Comment</button>
           <button mat-raised-button (click)="deleteIdea(item?.ideaId)">Delete</button>
         </div>
       </div>
@@ -25,7 +24,6 @@
   
     <div class="example-container">
       <h2>Review</h2>
-  
       <div
         cdkDropList
         id="review"
@@ -33,7 +31,11 @@
         class="example-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of ideas.review" cdkDrag>
-          {{item?.idea}}
+          <p>{{item?.idea}}</p>
+          <div class="actions">
+            <p>View {{item?.comments?.length}} comment<span *ngIf="item?.comments?.length > 1">s</span></p>
+            <button mat-raised-button class="create" (click)="openCommentDialog(item?.ideaId)">Add Comment</button>
+          </div>
         </div>
       </div>
     </div>
@@ -47,7 +49,8 @@
         [cdkDropListData]="ideas.accepted"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of ideas.accepted" cdkDrag>{{item?.idea}}</div>
+        <div class="example-box" *ngFor="let item of ideas.accepted" cdkDrag>
+          {{item?.idea}}</div>
       </div>
     </div>
   
