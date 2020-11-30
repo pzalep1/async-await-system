@@ -13,6 +13,7 @@ export class IdeaController {
   /**
    * Will create an Idea
    */
+  @UseGuards(JwtAuthGuard)
   @Post('/users/:userId/projects/:projectId/ideas')
   createIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any {
     const userId = routeParameterDTO.userId;
@@ -23,6 +24,7 @@ export class IdeaController {
   /*
   * Will update an idea
   */
+ @UseGuards(JwtAuthGuard)
  @Patch('/users/:userId/projects/:projectId/ideas/:ideaId')
  @HttpCode(201)
  updateIdea(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any):any{
@@ -35,21 +37,24 @@ export class IdeaController {
  /*
  *  Get specific idea
  */
-  @Get('/users/:userId/projects/:projectId/ideas/:ideaId')
-  @HttpCode(200)
-  getIdea(@Param() routeParameterDTO: any): any{
-    const userId = routeParameterDTO.userId;
-    const projectId = routeParameterDTO.projectId;
-    const ideaId = routeParameterDTO.ideaId;
-    return this.ideaService.getIdea(userId,projectId,ideaId);
-  }
+@UseGuards(JwtAuthGuard)
+@Get('/users/:userId/projects/:projectId/ideas/:ideaId')
+@HttpCode(200)
+getIdea(@Param() routeParameterDTO: any): any{
+  const userId = routeParameterDTO.userId;
+  const projectId = routeParameterDTO.projectId;
+  const ideaId = routeParameterDTO.ideaId;
+  return this.ideaService.getIdea(userId,projectId,ideaId);
+}
   /*
   * Will change state of an Idea
   */
   @Post('/users/:userId/projects/:projectId/ideas/:ideaId/status')
   @HttpCode(201)
+  @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
     const requester = this.request.user;
+    console.log(this.request.headers)
     console.log(requester);
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
@@ -60,6 +65,7 @@ export class IdeaController {
   /*
   * Will delete an Idea
   */
+  @UseGuards(JwtAuthGuard)
   @Delete('/users/:userId/projects/:projectId/ideas/:ideaId')
   @HttpCode(200)
   deleteIdea(@Param() routeParameterDTO: any): any{
@@ -71,6 +77,7 @@ export class IdeaController {
   /*
   * Will retrieve all comments for an Idea
   */
+  @UseGuards(JwtAuthGuard)
   @Get('/users/:userId/projects/:projectId/ideas/:ideaId/comments')
   @HttpCode(200)
   getComments(@Param() routeParameterDTO: any): any{

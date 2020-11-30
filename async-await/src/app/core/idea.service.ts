@@ -23,8 +23,27 @@ export class IdeaService {
       })
       .toPromise()
       .then((res: any) => {
-        console.log(res);
-        resolve(res);
+        const response = {
+          submitted: [],
+          review: [],
+          accepted: [],
+          rejected: []
+        }
+        res.forEach(idea => {
+          if (idea.state === 'submitted') {
+            response.submitted.push(idea);
+          }
+          if (idea.state === 'review') {
+            response.review.push(idea);
+          }
+          if (idea.state === 'accepted') {
+            response.accepted.push(idea);
+          }
+          if (idea.state === 'rejected') {
+            response.rejected.push(idea);
+          }
+        });
+        resolve(response);
       },
       (err) => {
         reject(err);
@@ -35,9 +54,12 @@ export class IdeaService {
   createIdea(userId: number, projectId: number, idea: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(IDEA_ROUTES.CREATE_IDEA(userId, projectId), {
-        headers: this.headers,
+      this.http.post(IDEA_ROUTES.CREATE_IDEA(userId, projectId),
+      {
         idea
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -52,9 +74,12 @@ export class IdeaService {
   updateIdea(userId: number, projectId: number, ideaId: number, ideaUpdates: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.patch(IDEA_ROUTES.UPDATE_IDEA(userId, projectId, ideaId), {
-        headers: this.headers,
+      this.http.patch(IDEA_ROUTES.UPDATE_IDEA(userId, projectId, ideaId), 
+      {
         ideaUpdates
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -101,9 +126,12 @@ export class IdeaService {
   updateState(userId: number, projectId: number, ideaId: number, state: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(IDEA_ROUTES.UPDATE_STATE(userId, projectId, ideaId), {
-        headers: this.headers,
+      this.http.post(IDEA_ROUTES.UPDATE_STATE(userId, projectId, ideaId),
+      {
         newState: state
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {

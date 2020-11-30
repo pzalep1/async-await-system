@@ -51,9 +51,11 @@ export class ProjectService {
   createProject(userId: number, project: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(PROJECT_ROUTES.CREATE_PROJECT(userId), {
-        headers: this.headers,
+      this.http.post(PROJECT_ROUTES.CREATE_PROJECT(userId),{
         project
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -68,9 +70,12 @@ export class ProjectService {
   addUserToProject(userId: number, projectId: number, newUserId: number) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), {
-        headers: this.headers,
+      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), 
+      {
         userId: newUserId
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -86,7 +91,7 @@ export class ProjectService {
     return new Promise((resolve, reject) => {
       this.initHeaders();
       this.http.get(PROJECT_ROUTES.GET_PROJECT_USERS(userId, projectId), {
-        headers: this.headers,
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -101,9 +106,11 @@ export class ProjectService {
   addAdminToProject(userId: number, projectId: number, newAdminId: number) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), {
-        headers: this.headers,
+      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), 
+      {
         userId: newAdminId
+      }, {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -134,11 +141,14 @@ export class ProjectService {
   updateProject(userId: number, projectId: number, updates: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.patch(PROJECT_ROUTES.UPDATE_PROJECT(userId, projectId), {
-        headers: this.headers,
+      this.http.patch(PROJECT_ROUTES.UPDATE_PROJECT(userId, projectId), 
+      {
         name: updates.name,
         description: updates.description,
         color: updates.color
+      },
+      {
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {
@@ -154,7 +164,7 @@ export class ProjectService {
     return new Promise((resolve, reject) => {
       this.initHeaders();
       this.http.delete(PROJECT_ROUTES.DELETE_USER_FROM_PROJECT(userId, projectId, removeUserId), {
-        headers: this.headers,
+        headers: this.headers
       })
       .toPromise()
       .then((res: any) => {

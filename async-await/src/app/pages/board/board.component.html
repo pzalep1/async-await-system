@@ -4,7 +4,7 @@
     <h1>{{project?.name}}</h1>
     <p>{{ project?.description }}</p>
   </div>
-  <button mat-raised-button class="create" (click)="openDialog()">Create Idea</button>
+  <button mat-raised-button class="create" (click)="openIdeaDialog()">Create Idea</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Submitted</h2>
@@ -12,12 +12,13 @@
       <div
         cdkDropList
         id="submitted"
-        [cdkDropListData]="submittedIdeas"
+        [cdkDropListData]="ideas.submitted"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of submittedIdeas" cdkDrag>
+        <div class="example-box" *ngFor="let item of ideas.submitted" cdkDrag>
           {{item?.idea}}
-          <button (click)="deleteIdea(item?.ideaId)">Delete</button>
+          <button mat-raised-button class="create" (click)="openDialog()">Add Comment</button>
+          <button mat-raised-button (click)="deleteIdea(item?.ideaId)">Delete</button>
         </div>
       </div>
     </div>
@@ -28,10 +29,10 @@
       <div
         cdkDropList
         id="review"
-        [cdkDropListData]="reviewIdeas"
+        [cdkDropListData]="ideas.review"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of reviewIdeas" cdkDrag>
+        <div class="example-box" *ngFor="let item of ideas.review" cdkDrag>
           {{item?.idea}}
         </div>
       </div>
@@ -43,10 +44,10 @@
       <div
         cdkDropList
         id="accepted"
-        [cdkDropListData]="acceptedIdeas"
+        [cdkDropListData]="ideas.accepted"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of acceptedIdeas" cdkDrag>{{item?.idea}}</div>
+        <div class="example-box" *ngFor="let item of ideas.accepted" cdkDrag>{{item?.idea}}</div>
       </div>
     </div>
   
@@ -56,10 +57,10 @@
       <div
         cdkDropList
         id="rejected"
-        [cdkDropListData]="rejectedIdeas"
+        [cdkDropListData]="ideas.rejected"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of rejectedIdeas" cdkDrag>{{item?.idea}}</div>
+        <div class="example-box" *ngFor="let item of ideas.rejected" cdkDrag>{{item?.idea}}</div>
       </div>
     </div>
   </div>
