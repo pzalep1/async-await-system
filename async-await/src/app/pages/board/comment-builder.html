@@ -1,3 +1,4 @@
+<p *ngFor="let comment of data.comments">{{comment.comment}}</p>
 <h1 mat-dialog-title>Create New Comment</h1>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
@@ -5,7 +6,7 @@
     <textarea matInput [(ngModel)]="data.comment"></textarea>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions [style.float]="right">
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit Idea</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Submit Comment</button>
 </div>

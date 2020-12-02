@@ -29,6 +29,12 @@ h3 {
   margin-bottom: 20px;
 }
 
+.create-button {
+  float: right;
+  background-color: #5431F2;
+  color: white;
+}
+
 .board {
   padding-left: 50px;
   padding-right: 50px;
@@ -51,7 +57,8 @@ h3 {
   }
   
   .example-box {
-    padding: 20px 10px;
+    height: 100px;
+    padding: 10px 10px;
     border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     display: flex;

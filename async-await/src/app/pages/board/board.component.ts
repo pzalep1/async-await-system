@@ -85,17 +85,19 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  openCommentDialog(ideaId: any): void {
+  openCommentDialog(ideaId: any, comments: any): void {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(CommentBuilder, {
       width: '500px',
       // Pass in existing comments
-      data: {}
+      data: { comments }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.newComment = result.comment;
-      this.createComment(ideaId);
+      if (result) {
+        this.newComment = result.comment;
+        this.createComment(ideaId);
+      }
     });
   }
 
