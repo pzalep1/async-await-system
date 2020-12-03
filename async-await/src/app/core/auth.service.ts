@@ -40,7 +40,7 @@ export class AuthService {
   login(user: any): Promise<any> {
     return new Promise((resolve, reject) => {
       let authUser = {};
-      this.http.patch(USER_ROUTES.LOGIN(), {user: user})
+      this.http.patch(USER_ROUTES.LOGIN(), { user: user })
       .toPromise()
       .then((res: any) => {
         authUser = res.found;
@@ -49,6 +49,7 @@ export class AuthService {
         resolve(this.user);
       },
       (err) => {
+        document.location.href = 'http://localhost:4200/login';
         reject(err);
       });
     });
@@ -99,6 +100,28 @@ export class AuthService {
       this.http.get(USER_ROUTES.GET_USERS(), { headers: this.headers })
       .toPromise()
       .then((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  updateUser(user: any) {
+    return new Promise((resolve, reject) => {
+      this.initHeaders();
+      this.http.patch(USER_ROUTES.UPDATE_USER(user.userId), 
+      {
+        user: {
+          userId: user.userId,
+          fName: user.fName,
+          lName: user.lName,
+          email: user.email,
+          password: user.password,
+        }
+      },
+      { headers: this.headers })
+      .toPromise()
+      .then((res: any) => {
+        this.user = user;
         resolve(res);
       });
     });

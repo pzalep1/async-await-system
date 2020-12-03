@@ -28,6 +28,15 @@ export class UserController {
     return this.userService.createUser(user);
   }
 
+  @Patch('/users/:userId')
+  @UseGuards(JwtAuthGuard)
+  updateUser(@Body() userWriteDTO: any, @Param() routeParameterDTO:any): any {
+    const requester = this.request.user;
+    const userId = routeParameterDTO.userId;
+    const updates = userWriteDTO.user as User;
+    return this.userService.updateUser(userId, updates, requester);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get('/users')
   @HttpCode(200)

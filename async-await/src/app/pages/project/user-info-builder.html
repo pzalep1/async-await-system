@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Update User Information</h1>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="data.user.fName">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="data.user.lName">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="data.user.email">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput [(ngModel)]="data.user.password">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Update</button>
+</div>

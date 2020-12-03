@@ -36,14 +36,22 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.auth.logout();
+    document.location.href = 'http://localhost:4200/login';
+  }
+
   createProject() {
     this.project.createProject(this.user.userId, this.newProject).then(async () => {
       this.projects = await this.project.getUsersProjects(this.user.userId);
-    })
+    });
+  }
+
+  updateUser() {
+    this.auth.updateUser(this.user);
   }
 
   openEditDialog(project?: any): void {
-    console.log(project);
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(ProjectBuilder, {
       width: '500px',
@@ -60,13 +68,29 @@ export class ProjectComponent implements OnInit {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(ProjectBuilder, {
       width: '500px',
-      data: { }
+      data: {  }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.name && result.description && result.color) {
         this.newProject = result;
         this.createProject();
+      }
+    });
+  }
+
+  openUserDialog(project?: any): void {
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(UserInfoBuilder, {
+      width: '500px',
+      data: { user: this.user }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.user = result.user;
+      this.auth.user = result.user;
+      if (result) {
+        this.updateUser();
       }
     });
   }
@@ -83,6 +107,23 @@ export class ProjectBuilder {
 
   constructor(
     public dialogRef: MatDialogRef<ProjectBuilder>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'user-info-builder',
+  templateUrl: 'user-info-builder.html',
+  styleUrls: ['./project.component.css']
+})
+export class UserInfoBuilder {
+
+  constructor(
+    public dialogRef: MatDialogRef<UserInfoBuilder>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {

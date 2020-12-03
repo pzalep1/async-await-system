@@ -8,9 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { UserInfoBuilder } from './project.component';
 
 @NgModule({
-  declarations: [ProjectComponent, ProjectBuilder],
+  declarations: [ProjectComponent, ProjectBuilder, UserInfoBuilder],
   imports: [
     CommonModule,
     MatCardModule,
@@ -23,6 +24,6 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
   ],
-  entryComponents: [ProjectComponent, ProjectBuilder]
+  entryComponents: [ProjectComponent, ProjectBuilder, UserInfoBuilder]
 })
 export class ProjectModule { }

@@ -1,14 +1,16 @@
 <div class="wrapper">
   <div class="top">
     <h1 class="page-title">Welcome, {{ user?.fName }}!</h1>
+    <button mat-raised-button style="margin-left: 10px; float: right; margin-top: 20px" (click)="logout()">Sign out</button>
     <button mat-raised-button class="create" (click)="openDialog()">Create new Project</button>
+
   </div>
 
   <div class="lists">
     <h2>Projects you administer</h2>
     <div class="flex-container">
       <mat-card class="card" *ngFor="let project of projects?.administers">
-        <a class="card-link" [routerLink]= "['/users', user.userId, 'projects', project?.projectId]">
+        <a class="card-link" [routerLink]= "['/users', user?.userId, 'projects', project?.projectId]">
         <div class="top" [style.background]="project.color"></div>
         <div class="inner">
           <h3>{{ project?.name }}</h3>
@@ -36,5 +38,8 @@
       </mat-card>
     </div>
   </div>
+  <button style="position: absolute; left: 0; bottom: 0; margin: 20px;" color="primary" (click)="openUserDialog()" mat-mini-fab >
+    <mat-icon>settings</mat-icon>
+  </button>
 </div>
 

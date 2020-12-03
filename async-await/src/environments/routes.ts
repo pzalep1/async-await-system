@@ -15,6 +15,9 @@ export const USER_ROUTES = {
     },
     GET_USERS(): string {
         return `${environment.apiURL}/users`;
+    },
+    UPDATE_USER(userId: number): string {
+        return `${environment.apiURL}/users/${userId}`;
     }
 };
 

@@ -18,6 +18,20 @@ export class UserService {
       return;
     }
   }
+
+  async updateUser(userId: number, updates: any, requester: any): Promise<any> {
+    const user = await this.userRepository.findOne(requester.userId);
+    const found = await this.userRepository.findOne(userId);
+    if (found && found.userId === user.userId) {
+      return this.userRepository.update(userId, updates);
+    } else {
+      if (!found) {
+        throw new HttpException('User not found. Unable to update', HttpStatus.NOT_FOUND);
+      } else {
+        throw new HttpException('Not authorized to update this user', HttpStatus.FORBIDDEN);
+      }
+    }
+  }
   async deleteUser(userId: string, requester: any): Promise<any> {
     const user = await this.userRepository.findOne(requester.userId);
     const found = await this.userRepository.findOne(userId);
