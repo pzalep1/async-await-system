@@ -118,7 +118,6 @@ export class BoardComponent implements OnInit {
           ideas.review[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
           
           ideas.review[i].votes = this.sortVotes(ideas.review[i].votes);
-          console.log('new', ideas.review[i].votes);
         });
       }
       // tslint:disable-next-line: prefer-for-of

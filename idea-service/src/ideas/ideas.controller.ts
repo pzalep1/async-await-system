@@ -54,8 +54,6 @@ getIdea(@Param() routeParameterDTO: any): any{
   @UseGuards(JwtAuthGuard)
   changeState(@Param() routeParameterDTO: any, @Body() ideaWriteDTO: any): any{
     const requester = this.request.user;
-    console.log(this.request.headers)
-    console.log(requester);
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
     const ideaId = routeParameterDTO.ideaId;

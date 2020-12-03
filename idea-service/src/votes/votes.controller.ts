@@ -59,7 +59,6 @@ export class VotesController {
  @HttpCode(201)
  @UseGuards(JwtAuthGuard)
  updateVote(@Param() routeParameterDTO:any, @Body() voteWriteDTO: any):any{
-   try{
     const userId = routeParameterDTO.userId;
     const projectId = routeParameterDTO.projectId;
     const ideaId = routeParameterDTO.ideaId;
@@ -67,9 +66,5 @@ export class VotesController {
     const vote = voteWriteDTO.vote;
     const requester = this.request.user;
     return this.voteService.updateVote(userId,projectId,ideaId,voteId,vote, requester);
-   }
-   catch(e){
-     console.log(e);
-   }
  }
 }
