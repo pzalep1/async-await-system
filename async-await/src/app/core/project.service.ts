@@ -106,7 +106,7 @@ export class ProjectService {
   addAdminToProject(userId: number, projectId: number, newAdminId: number) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.post(PROJECT_ROUTES.ADD_USER_TO_PROJECT(userId, projectId), 
+      this.http.post(PROJECT_ROUTES.ADD_ADMIN_USER_TO_PROJECT(userId, projectId),
       {
         userId: newAdminId
       }, {

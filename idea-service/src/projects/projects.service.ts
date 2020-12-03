@@ -90,9 +90,12 @@ export class ProjectService {
    * @param projectId The id of the project to add the user to
    */
   async addUserToProject(userId: number, projectId: number): Promise<any> {
-    console.log(userId);
     const user = await this.userRepository.findOne({userId});
+    const admin = await this.adminRepository.findOne({userId, projectId});
     if (user) {
+      if (admin) {
+        await this.adminRepository.delete({userId, projectId});
+      }
       return this.memberRepository.insert({userId, projectId});
     } else {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -105,8 +108,12 @@ export class ProjectService {
    */
   async addAdminToProject(userId: number, projectId: number): Promise<any> {
     const user = await this.userRepository.findOne({userId});
+    const memberUser = await this.memberRepository.findOne({userId, projectId});
     if (user) {
-      this.adminRepository.insert({userId, projectId});
+      if(memberUser) {
+        await this.memberRepository.delete({userId, projectId});
+      }
+      return this.adminRepository.insert({userId, projectId});
     } else {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }

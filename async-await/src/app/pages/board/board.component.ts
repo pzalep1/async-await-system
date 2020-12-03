@@ -35,6 +35,10 @@ export class BoardComponent implements OnInit {
   admins: any;
   projectUsers: any;
   commentString: string = 'Comments';
+  adminUsers: string;
+
+  notAdminUsers: any[] = [];
+  notProjectUsers: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -47,40 +51,34 @@ export class BoardComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    // Grab route parameters
     this.userId = this.route.snapshot.paramMap.get('userId');
     this.projectId = this.route.snapshot.paramMap.get('projectId');
    // Get the project so we have the name and description
     this.project = await this.projectService.getProject(this.userId, this.projectId);
+    // Get the ideas for the project
     this.getIdeas();
     // Get all users
     this.users = await this.auth.getUsers();
-    // Get Admins for a project
-    this.admins = await this.projectService.getAdminsForProject(this.userId, this.projectId);
-
-    this.projectUsers = await this.projectService.getUsersForProject(this.userId, this.projectId);
-    const noProjectUsers = [];
-    const userInProj = this.projectUsers.map(x => x.userId);
-    const admins = this.admins.map(x => x.userId);
-    this.users.forEach(user => {
-      if (!userInProj.includes(user.userId) && !admins.includes(user.userId)) {
-        noProjectUsers.push(user);
-      }
-    });
-    this.users = noProjectUsers;
+    this.getUsersForProject();
   }
 
-  // Handle drop events
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-      const idea = event.container.data[0] as any;
-      this.ideaService.updateState(this.userId, this.projectId, idea.ideaId, event.container.id);
-    }
+  async getUsersForProject() {
+    this.admins = await this.projectService.getAdminsForProject(this.userId, this.projectId);
+    this.projectUsers = await this.projectService.getUsersForProject(this.userId, this.projectId);
+    // Sort out these into arrays
+    const userInProj = this.projectUsers.map(x => x.userId);
+    const admins = this.admins.map(x => x.userId);
+
+    this.notAdminUsers = [];
+    this.notProjectUsers = [];
+    this.users.forEach(user => {
+      if (!admins.includes(user.userId)) {
+        this.notAdminUsers.push(user);
+      } else if (!userInProj.includes(user.userId)) {
+        this.notProjectUsers.push(user);
+      }
+    });
   }
 
   createIdea() {
@@ -99,12 +97,85 @@ export class BoardComponent implements OnInit {
     });
   }
   addUser(newUserId: any) {
-    this.projectService.addUserToProject(this.userId, this.projectId, newUserId);
+    this.projectService.addUserToProject(this.userId, this.projectId, newUserId).then(() => {
+      this.getUsersForProject();
+    });
   }
   addAdmin(newAdminId: any) {
-    this.projectService.addAdminToProject(this.userId, this.projectId, newAdminId);
+    this.projectService.addAdminToProject(this.userId, this.projectId, newAdminId).then(() => {
+      this.getUsersForProject();
+    });
   }
 
+  getIdeas() {
+    this.ideaService.getIdeasForAProject(this.userId, this.projectId).then((ideas: any) => {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < ideas.review.length; i++) {
+        const ideaId = ideas.review[i].ideaId;
+        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
+          // tslint:disable-next-line: prefer-for-of
+          ideas.review[i].comments = comments;
+          ideas.review[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
+          
+          ideas.review[i].votes = this.sortVotes(ideas.review[i].votes);
+          console.log('new', ideas.review[i].votes);
+        });
+      }
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < ideas.accepted.length; i++) {
+        const ideaId = ideas.accepted[i].ideaId;
+        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
+          // tslint:disable-next-line: prefer-for-of
+          ideas.accepted[i].comments = comments;
+          ideas.accepted[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
+
+          ideas.accepted[i].votes = this.sortVotes(ideas.accepted[i].votes);
+        });
+      }
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < ideas.rejected.length; i++) {
+        const ideaId = ideas.rejected[i].ideaId;
+        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
+          // tslint:disable-next-line: prefer-for-of
+          ideas.rejected[i].comments = comments;
+          ideas.rejected[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
+
+          ideas.rejected[i].votes = this.sortVotes(ideas.rejected[i].votes);
+        });
+      }
+      this.ideas = ideas;
+    });
+  }
+
+  sortVotes(votes) {
+    let upVote = 0;
+    let downVote = 0;
+    votes.forEach(vote => {
+      if (vote.vote == true) {
+        upVote ++;
+      } else {
+        downVote++;
+      }
+      if (vote.userId == this.userId) {
+        vote.userVote = vote.vote;
+      }
+    });
+    votes.upVote = upVote;
+    votes.downVote = downVote;
+    return votes;
+  }
+  upVote(id: number) {
+    this.vote.voteOnIdea(this.userId, this.projectId, id, true).then(async () => {
+      this.getIdeas();
+    });
+  }
+  downVote(id: number) {
+    this.vote.voteOnIdea(this.userId, this.projectId, id, false).then(() => {
+      this.getIdeas();
+    });
+  }
+
+  // Dialog Controllers
   openIdeaDialog(): void {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(IdeaBuilder, {
@@ -138,7 +209,7 @@ export class BoardComponent implements OnInit {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(UserBuilder, {
       width: '500px',
-      data: { users: this.users }
+      data: { users: this.notProjectUsers }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -147,47 +218,32 @@ export class BoardComponent implements OnInit {
       }
     });
   }
+  openAdminDialog(): void {
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(AdminBuilder, {
+      width: '500px',
+      data: { users: this.notAdminUsers }
+    });
 
-  getIdeas() {
-    this.ideaService.getIdeasForAProject(this.userId, this.projectId).then((ideas: any) => {
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < ideas.review.length; i++) {
-        const ideaId = ideas.review[i].ideaId;
-        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
-          // tslint:disable-next-line: prefer-for-of
-          ideas.review[i].comments = comments;
-          ideas.review[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
-        });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.addAdmin(result.userId);
       }
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < ideas.accepted.length; i++) {
-        const ideaId = ideas.accepted[i].ideaId;
-        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
-          // tslint:disable-next-line: prefer-for-of
-          ideas.accepted[i].comments = comments;
-          ideas.accepted[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
-        });
-      }
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < ideas.rejected.length; i++) {
-        const ideaId = ideas.rejected[i].ideaId;
-        this.commentService.getCommentsForIdea(this.userId, this.projectId, ideaId).then(async (comments: any) => {
-          // tslint:disable-next-line: prefer-for-of
-          ideas.rejected[i].comments = comments;
-          ideas.rejected[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
-        });
-      }
-      this.ideas = ideas;
     });
   }
 
-  upVote(id: number) {
-    this.vote.voteOnIdea(this.userId, this.projectId, id, true).then(async () => {
-      const votes = []
-    });
-  }
-  downVote(id: number) {
-    this.vote.voteOnIdea(this.userId, this.projectId, id, false);
+   // Handle drop events for columns
+   drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+      const idea = event.container.data[0] as any;
+      this.ideaService.updateState(this.userId, this.projectId, idea.ideaId, event.container.id);
+    }
   }
 }
 
@@ -236,6 +292,24 @@ export class CommentBuilder {
   constructor(
     public dialogRef: MatDialogRef<CommentBuilder>,
     @Inject(MAT_DIALOG_DATA) public data: CommentDialogData) {}
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'admin-builder',
+  templateUrl: 'admin-builder.html',
+  styleUrls: ['./board.component.css']
+})
+export class AdminBuilder {
+
+  constructor(
+    public dialogRef: MatDialogRef<AdminBuilder>,
+    @Inject(MAT_DIALOG_DATA) public data: UserDialogData) {}
 
 
   onNoClick(): void {

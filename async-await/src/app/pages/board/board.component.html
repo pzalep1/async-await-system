@@ -6,7 +6,7 @@
   </div>
   <button mat-raised-button class="create" (click)="openIdeaDialog()">Create Idea</button>
   <button mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
-  <button mat-raised-button class="create" (click)="openUserDialog()">Add Admin</button>
+  <button mat-raised-button class="create" (click)="openAdminDialog()">Add Admin</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Submitted</h2>
@@ -44,9 +44,12 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-          <p></p>
           <div class="buttons">
-            <button class="delete" mat-mini-fab color="good" aria-label="Up vote idea" (click)="upVote(item?.ideaId)">
+            <div style="float: left; padding-right: 80px; padding-top: 10px;">
+              <mat-icon>thumb_up</mat-icon>{{ item?.votes?.upVote }}
+              <mat-icon>thumb_down</mat-icon> {{ item?.votes?.downVote }}
+            </div>
+            <button class="delete" mat-mini-fab aria-label="Up vote idea" (click)="upVote(item?.ideaId)">
               <mat-icon>thumb_up</mat-icon>
             </button>
             <button class="delete" mat-mini-fab aria-label="Down vote idea" (click)="downVote(item?.ideaId)">

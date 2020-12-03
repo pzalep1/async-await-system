@@ -45,7 +45,6 @@ export class VoteService {
       })
       .toPromise()
       .then((res: any) => {
-        console.log(res)
         resolve(res);
       },
       (err) => {
