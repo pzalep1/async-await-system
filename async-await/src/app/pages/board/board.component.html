@@ -5,8 +5,8 @@
     <p>{{ project?.description }}</p>
   </div>
   <button mat-raised-button class="create" (click)="openIdeaDialog()">Create Idea</button>
-  <button mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
-  <button mat-raised-button class="create" (click)="openAdminDialog()">Add Admin</button>
+  <button *ngIf="adminUsers?.includes(user?.userId)" mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
+  <button  *ngIf="projectUsers?.includes(user?.userId)" mat-raised-button class="create" (click)="openAdminDialog()">Add Admin</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Submitted</h2>
@@ -86,10 +86,10 @@
         [cdkDropListData]="ideas.rejected"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <!-- <mat-card class="card" *ngFor="let item of ideas.rejected" cdkDrag>
+        <mat-card class="card" *ngFor="let item of ideas.rejected" cdkDrag>
           <p>{{ item?.idea }}</p>
           <button mat-raised-button class="delete" (click)="deleteIdea(item?.ideaId)">Delete</button>
-        </mat-card> -->
+        </mat-card>
       </div>
     </div>
   </div>

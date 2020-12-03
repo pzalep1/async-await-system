@@ -53,7 +53,7 @@ export class VotesService {
       if (project && (userAuthorized || adminAuthorized)) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
-          const userVote = await this.voteRepository.findOne({userId});
+          const userVote = await this.voteRepository.findOne({userId, ideaId});
           if (!userVote) {
             return this.voteRepository.insert({userId, ideaId, vote});
           } else if (vote !== userVote.vote) {
