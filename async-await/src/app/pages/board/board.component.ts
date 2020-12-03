@@ -37,6 +37,7 @@ export class BoardComponent implements OnInit {
   commentString: string = 'Comments';
   adminUsers: string;
 
+  isAdmin: boolean;
   notAdminUsers: any[] = [];
   notProjectUsers: any[] = [];
 
@@ -68,15 +69,19 @@ export class BoardComponent implements OnInit {
     this.projectUsers = await this.projectService.getUsersForProject(this.userId, this.projectId);
     // Sort out these into arrays
     const userInProj = this.projectUsers.map(x => x.userId);
-    const admins = this.admins.map(x => x.userId);
+    const admins = this.admins.map(x => x.userId.toString());
+
+    this.isAdmin = admins.includes(this.userId);
 
     this.notAdminUsers = [];
     this.notProjectUsers = [];
     this.users.forEach(user => {
-      if (!admins.includes(user.userId)) {
-        this.notAdminUsers.push(user);
-      } else if (!userInProj.includes(user.userId)) {
-        this.notProjectUsers.push(user);
+      if (user.userId !== this.userId) {
+        if (!admins.includes(user.userId)) {
+          this.notAdminUsers.push(user);
+        } else if (!userInProj.includes(user.userId)) {
+          this.notProjectUsers.push(user);
+        }
       }
     });
   }
@@ -116,7 +121,7 @@ export class BoardComponent implements OnInit {
           // tslint:disable-next-line: prefer-for-of
           ideas.review[i].comments = comments;
           ideas.review[i].votes = await this.vote.getVotesForIdea(this.userId, this.projectId, ideaId);
-          
+
           ideas.review[i].votes = this.sortVotes(ideas.review[i].votes);
         });
       }

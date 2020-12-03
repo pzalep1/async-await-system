@@ -12,10 +12,13 @@
         <div class="top" [style.background]="project.color"></div>
         <div class="inner">
           <h3>{{ project?.name }}</h3>
-          <p>{{ project?.description }}</p>
+          <p style="padding-bottom: 20px;">{{ project?.description }}</p>
         </div>
         </a>
-        <button class="trash" mat-mini-fab color="warn" aria-label="Delete project" (click)="deleteProject(project)">
+        <button style="position: absolute; left: 0; bottom: 0; margin: 10px;" (click)="openEditDialog(project)" mat-mini-fab >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button style="position: absolute; right: 0; bottom: 0; margin: 10px;" class="trash" mat-mini-fab color="warn" aria-label="Delete project" (click)="deleteProject(project)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card>

@@ -5,8 +5,8 @@
     <p>{{ project?.description }}</p>
   </div>
   <button mat-raised-button class="create" (click)="openIdeaDialog()">Create Idea</button>
-  <button *ngIf="adminUsers?.includes(user?.userId)" mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
-  <button  *ngIf="projectUsers?.includes(user?.userId)" mat-raised-button class="create" (click)="openAdminDialog()">Add Admin</button>
+  <button *ngIf="isAdmin" mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
+  <button  *ngIf="isAdmin" mat-raised-button class="create" (click)="openAdminDialog()">Add Admin</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Submitted</h2>

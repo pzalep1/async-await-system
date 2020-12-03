@@ -30,20 +30,43 @@ export class ProjectComponent implements OnInit {
       this.projects = await this.project.getUsersProjects(this.user.userId);
     });
   }
+  updateProject(project: any, updates) {
+    this.project.updateProject(this.user.userId, project.projectId, updates).then(async () => {
+      this.projects = await this.project.getUsersProjects(this.user.userId);
+    });
+  }
 
+  createProject() {
+    this.project.createProject(this.user.userId, this.newProject).then(async () => {
+      this.projects = await this.project.getUsersProjects(this.user.userId);
+    })
+  }
+
+  openEditDialog(project?: any): void {
+    console.log(project);
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(ProjectBuilder, {
+      width: '500px',
+      data: { name: project.name, description: project.description, color: project.color }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.name && result.description && result.color) {
+        this.updateProject(project, result);
+      }
+    });
+  }
   openDialog(): void {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(ProjectBuilder, {
       width: '500px',
-      data: {}
+      data: { }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.newProject = result;
       if (result && result.name && result.description && result.color) {
-        this.project.createProject(this.user.userId, this.newProject).then(async () => {
-          this.projects = await this.project.getUsersProjects(this.user.userId);
-        });
+        this.newProject = result;
+        this.createProject();
       }
     });
   }

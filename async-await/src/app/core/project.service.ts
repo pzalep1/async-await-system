@@ -141,7 +141,7 @@ export class ProjectService {
   updateProject(userId: number, projectId: number, updates: any) {
     return new Promise((resolve, reject) => {
       this.initHeaders();
-      this.http.patch(PROJECT_ROUTES.UPDATE_PROJECT(userId, projectId), 
+      this.http.patch(PROJECT_ROUTES.UPDATE_PROJECT(userId, projectId),
       {
         name: updates.name,
         description: updates.description,
