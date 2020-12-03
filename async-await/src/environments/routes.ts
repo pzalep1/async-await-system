@@ -12,6 +12,9 @@ export const USER_ROUTES = {
     },
     DELETE_USER(userId: number): string {
         return `${environment.apiURL}/users/${userId}`;
+    },
+    GET_USERS(): string {
+        return `${environment.apiURL}/users`;
     }
 };
 
@@ -35,7 +38,7 @@ export const PROJECT_ROUTES = {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
     },
     GET_PROJECT_ADMINS(userId: number, projectId: number): string {
-        return `${environment.apiURL}/users/${userId}/projects/${projectId}/admin/users`;
+        return `${environment.apiURL}/users/${userId}/projects/${projectId}/users/admins`;
     },
     UPDATE_PROJECT(userId: number, projectId: number): string {
         return `${environment.apiURL}/users/${userId}/projects/${projectId}`;

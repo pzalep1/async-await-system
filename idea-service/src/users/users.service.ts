@@ -31,6 +31,14 @@ export class UserService {
       }
     }
   }
+
+  async getUsers(): Promise<any> {
+    const users = await this.userRepository.find();
+    users.forEach(user => {
+      delete user.password;
+    });
+    return users;
+  }
   async login(user: any): Promise<any> {
     // SQL Query executed: FROM USER SELECT * WHERE email = user.email;
     const found = await this.userRepository.createQueryBuilder('User').where('email = :email', { email: user.email }).getOne();

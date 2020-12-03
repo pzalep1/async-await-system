@@ -10,11 +10,9 @@ import { LoginModule } from './pages/login/login.module';
 import { RegisterModule } from './pages/register/register.module';
 import { ProjectModule } from './pages/project/project.module';
 import { BoardModule } from './pages/board/board.module';
-import { HomeComponent } from './pages/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,

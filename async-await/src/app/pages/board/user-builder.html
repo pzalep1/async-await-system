@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Add Admin to Project</h1>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Users</mat-label>
+    <mat-select [(value)]="data.userId">
+        <mat-option *ngFor="let user of data.users" value="{{ user.userId }}">{{ user.fName }} {{ user.lName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add User</button>
+</div>

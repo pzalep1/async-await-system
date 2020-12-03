@@ -188,7 +188,6 @@ export class ProjectService {
       });
     });
   }
-
   private initHeaders() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (token !== null) {

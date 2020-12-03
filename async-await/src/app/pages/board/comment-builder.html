@@ -1,4 +1,25 @@
-<p *ngFor="let comment of data.comments">{{comment.comment}}</p>
+<h1>Comments</h1>
+<div class="comments" style="margin-bottom: 10px">
+  <p *ngIf="data?.comments?.length === 0">No Comments!</p>
+  <mat-card *ngFor="let comment of data.comments" style="margin-bottom: 5px;">
+    <mat-card-header>
+      <div mat-card-avatar><mat-icon>comment</mat-icon></div>
+      <mat-card-subtitle>Commented on {{ comment.timestamp | date }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: inline-block; width: 80%">
+        <p>
+          {{ comment.comment }}
+        </p>
+      </div>
+      <button style="float: right;" mat-mini-fab color="warn" aria-label="Delete idea" (click)="deleteComment(item?.ideaId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-content>
+    </mat-card>
+</div>
+
+
 <h1 mat-dialog-title>Create New Comment</h1>
 <div mat-dialog-content>
   <mat-form-field class="full-width">

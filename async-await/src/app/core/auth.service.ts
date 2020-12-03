@@ -93,6 +93,17 @@ export class AuthService {
     });
   }
 
+  getUsers() {
+    return new Promise((resolve, reject) => {
+      this.initHeaders();
+      this.http.get(USER_ROUTES.GET_USERS(), { headers: this.headers })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
   private storeToken(token: string) {
     localStorage.setItem(TOKEN_KEY, token);
   }

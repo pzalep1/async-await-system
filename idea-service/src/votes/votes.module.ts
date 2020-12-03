@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Administers } from 'src/entities/administers.entity';
 import { Idea } from 'src/entities/idea.entity';
 import { Member } from 'src/entities/member.entity';
 import { Project } from 'src/entities/project.entity';
@@ -15,6 +16,7 @@ import { VotesService } from './votes.service';
     TypeOrmModule.forFeature([Idea]),
     TypeOrmModule.forFeature([User]),
     TypeOrmModule.forFeature([Vote]),
+    TypeOrmModule.forFeature([Administers]),
   ],
   controllers: [VotesController],
   providers: [VotesService, JwtStrategy]

@@ -90,6 +90,7 @@ export class ProjectService {
    * @param projectId The id of the project to add the user to
    */
   async addUserToProject(userId: number, projectId: number): Promise<any> {
+    console.log(userId);
     const user = await this.userRepository.findOne({userId});
     if (user) {
       return this.memberRepository.insert({userId, projectId});

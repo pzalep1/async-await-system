@@ -5,6 +5,8 @@
     <p>{{ project?.description }}</p>
   </div>
   <button mat-raised-button class="create" (click)="openIdeaDialog()">Create Idea</button>
+  <button mat-raised-button class="create" (click)="openUserDialog()">Add User</button>
+  <button mat-raised-button class="create" (click)="openUserDialog()">Add Admin</button>
   <div cdkDropListGroup>
     <div class="example-container">
       <h2>Submitted</h2>
@@ -15,10 +17,14 @@
         [cdkDropListData]="ideas.submitted"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of ideas.submitted" cdkDrag>
-          {{item?.idea}}
-          <button mat-raised-button (click)="deleteIdea(item?.ideaId)">Delete</button>
-        </div>
+        <mat-card class="card" *ngFor="let item of ideas.submitted" cdkDrag>
+          <p>{{ item?.idea }}</p>
+          <div class="buttons">
+            <button class="delete" mat-mini-fab color="warn" aria-label="Delete idea" (click)="deleteIdea(item?.ideaId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-card>
       </div>
     </div>
   
@@ -30,10 +36,24 @@
         [cdkDropListData]="ideas.review"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of ideas.review" cdkDrag>
-          <p>{{item?.idea}}</p>
-          <button mat-raised-button class="create-button" (click)="openCommentDialog(item?.ideaId, item?.comments)">View {{item?.comments?.length}} Comment<span *ngIf="item?.comments?.length !== 1">s</span></button>
-        </div>
+        <mat-card class="card" *ngFor="let item of ideas.review" cdkDrag>
+          <p>{{ item?.idea }}</p>
+          <div class="buttons">
+            <button mat-raised-button class="create-button" (click)="openCommentDialog(item?.ideaId, item?.comments)">View {{item?.comments?.length}} {{ commentString }}</button>
+            <button class="delete" mat-mini-fab color="warn" aria-label="Delete idea" (click)="deleteIdea(item?.ideaId)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <p></p>
+          <div class="buttons">
+            <button class="delete" mat-mini-fab color="good" aria-label="Up vote idea" (click)="upVote(item?.ideaId)">
+              <mat-icon>thumb_up</mat-icon>
+            </button>
+            <button class="delete" mat-mini-fab aria-label="Down vote idea" (click)="downVote(item?.ideaId)">
+              <mat-icon>thumb_down</mat-icon>
+            </button>
+          </div>
+        </mat-card>
       </div>
     </div>
   
@@ -46,10 +66,13 @@
         [cdkDropListData]="ideas.accepted"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of ideas.accepted" cdkDrag>
-          {{item?.idea}}</div>
-      </div>
+        <mat-card class="card" *ngFor="let item of ideas.accepted" cdkDrag>
+          <p>{{ item?.idea }}</p>
+          <button mat-raised-button class="create-button" (click)="openCommentDialog(item?.ideaId, item?.comments)">View {{item?.comments?.length}} Comment</button>
+          <button mat-raised-button class="delete" (click)="deleteIdea(item?.ideaId)">Delete</button>
+        </mat-card>
     </div>
+  </div>
   
     <div class="example-container">
       <h2>Rejected</h2>
@@ -60,9 +83,11 @@
         [cdkDropListData]="ideas.rejected"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of ideas.rejected" cdkDrag>{{item?.idea}}</div>
+        <!-- <mat-card class="card" *ngFor="let item of ideas.rejected" cdkDrag>
+          <p>{{ item?.idea }}</p>
+          <button mat-raised-button class="delete" (click)="deleteIdea(item?.ideaId)">Delete</button>
+        </mat-card> -->
       </div>
     </div>
   </div>
-
 </div>

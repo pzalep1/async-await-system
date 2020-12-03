@@ -53,15 +53,40 @@ export class CommentService {
     });
   }
 
-  deleteComment(userId: number, projectId: number, ideaId: number) {
+  deleteComment(userId: number, projectId: number, ideaId: number, commentId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.delete(COMMENT_ROUTES.DELETE_COMMENT(userId, projectId, ideaId, commentId),
+      {
+        headers: this.headers
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 
-  updateComment(userId: number, projectId: number, ideaId: number, ideaUpdate: any) {
+  updateComment(userId: number, projectId: number, ideaId: number, ideaUpdate: any, commentId: number) {
     return new Promise((resolve, reject) => {
-
+      this.initHeaders();
+      this.http.post(COMMENT_ROUTES.UPDATE_COMMENT(userId, projectId, ideaId, commentId),
+      {
+        
+      },
+      {
+        headers: this.headers
+      })
+      .toPromise()
+      .then((res: any) => {
+        resolve(res);
+      },
+      (err) => {
+        reject(err);
+      });
     });
   }
 

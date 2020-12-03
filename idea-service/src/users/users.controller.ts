@@ -28,6 +28,13 @@ export class UserController {
     return this.userService.createUser(user);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('/users')
+  @HttpCode(200)
+  getUsers(): any {
+    return this.userService.getUsers();
+  }
+
   /**
    * Will log in a user
    */
@@ -45,7 +52,6 @@ export class UserController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   checkToken() {
-    console.log('reqs')
     const requester = this.request.user;
     return requester;
   }
