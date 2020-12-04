@@ -45,7 +45,8 @@ export class CommentService {
     if (user) {
       const project = await this.projectRepository.findOne({projectId});
       const userAuthorized = await this.memberRepository.findOne({userId: requester.userId, projectId});
-      if (project && userAuthorized) {
+      const adminAuthorized = await this.adminRepository.findOne({userId: requester.userId, projectId});
+      if (project && (userAuthorized || adminAuthorized)) {
         const foundIdea = await this.ideaRepository.findOne({ideaId});
         if (foundIdea) {
           return this.commentRepository.delete({commentId});

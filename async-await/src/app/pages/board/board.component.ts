@@ -12,6 +12,10 @@ export interface IdeaDialogData {
   idea: string;
 }
 export interface CommentDialogData {
+  comments: any [];
+  projectId: number;
+  userId: number;
+  ideaId: number;
   comment: string;
 }
 
@@ -198,7 +202,7 @@ export class BoardComponent implements OnInit {
     const dialogRef = this.dialog.open(CommentBuilder, {
       width: '500px',
       // Pass in existing comments
-      data: { ideaId, comments }
+      data: { userId: this.userId, projectId: this.projectId, ideaId, comments }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -206,6 +210,7 @@ export class BoardComponent implements OnInit {
         this.newComment = result.comment;
         this.createComment(ideaId);
       }
+      this.getIdeas();
     });
   }
 
@@ -295,11 +300,20 @@ export class CommentBuilder {
 
   constructor(
     public dialogRef: MatDialogRef<CommentBuilder>,
-    @Inject(MAT_DIALOG_DATA) public data: CommentDialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: CommentDialogData,
+    private comment: CommentService) {}
 
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  deleteComment(commentId) {
+    this.comment.deleteComment(this.data.userId, this.data.projectId, this.data.ideaId, commentId).then(async () => {
+      console.log('before', this.data.comments);
+      this.data.comments = await this.comment.getCommentsForIdea(this.data.userId, this.data.projectId, this.data.ideaId);
+      console.log('after', this.data.comments);
+    });
   }
 
 }

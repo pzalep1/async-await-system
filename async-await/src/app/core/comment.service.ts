@@ -15,7 +15,7 @@ export class CommentService {
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
-  getCommentsForIdea(userId: number, projectId: number, ideaId: number) {
+  getCommentsForIdea(userId: number, projectId: number, ideaId: number): any {
     return new Promise((resolve, reject) => {
       this.initHeaders();
       this.http.get(IDEA_ROUTES.GET_COMMENTS_FOR_IDEA(userId, projectId, ideaId),

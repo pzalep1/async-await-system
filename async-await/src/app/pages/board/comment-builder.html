@@ -12,7 +12,7 @@
           {{ comment.comment }}
         </p>
       </div>
-      <button style="float: right;" mat-mini-fab color="warn" aria-label="Delete idea" (click)="deleteComment(item?.ideaId)">
+      <button style="float: right;" mat-mini-fab color="warn" aria-label="Delete idea" (click)="deleteComment(comment?.commentId)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-content>
