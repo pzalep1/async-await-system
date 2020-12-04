@@ -13,7 +13,7 @@ Docker https://www.docker.com/get-started
 Running the commands below will allow you to spin up AsyncAwait
 
 ```sh
-$ cd idea-service
+$ cd async-await-system
 $ docker-compose up
 ```
 Open a new terminal tab 
