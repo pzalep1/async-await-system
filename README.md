@@ -10,7 +10,7 @@ Docker https://www.docker.com/get-started
 
 ### Installation
 
-Running the commands below will allow you to spin up the CARDS system. 
+Running the commands below will allow you to spin up AsyncAwait
 
 ```sh
 $ cd idea-service
@@ -28,12 +28,7 @@ $ cd async-await
 $ npm install
 $ ng serve 
 ```
-Open a new tab
-```sh
-$ cd startup-scripts
-$ npm install
-$ node startup.js
-```
+
 ### Ports 
 
 MySql: http://localhost:3306 
