@@ -310,9 +310,7 @@ export class CommentBuilder {
 
   deleteComment(commentId) {
     this.comment.deleteComment(this.data.userId, this.data.projectId, this.data.ideaId, commentId).then(async () => {
-      console.log('before', this.data.comments);
       this.data.comments = await this.comment.getCommentsForIdea(this.data.userId, this.data.projectId, this.data.ideaId);
-      console.log('after', this.data.comments);
     });
   }
 
