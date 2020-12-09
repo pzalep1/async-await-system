@@ -29,6 +29,15 @@ services:
             - notused:/opt/src/app/node_modules
         restart: on-failure
         command: ng serve --host 0.0.0.0
+    service:
+        build: ./idea-service
+        ports: 
+            - "3002:3002"
+        volumes:
+            - ./idea-service:/opt/src/app
+            - notused:/opt/src/app/node_modules
+        restart: on-failure
+        command: npm start
 
 volumes:
     notused:
