@@ -15,10 +15,10 @@ export function generateBearerToken(user: any, expires?: number) {
       email: user.email,
     };
     const options = {
-      issuer: process.env.ISSUER,
+      issuer: 'THIS_IS_AN_ISSUER',
       expiresIn: expiration,
       audience: user.email
     };
-    const token = jwt.sign(payload, process.env.KEY, options);
+    const token = jwt.sign(payload, 'THIS_IS_A_KEY', options);
     return token;
   }
