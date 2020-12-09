@@ -1,5 +1,5 @@
-<h1 *ngIf="!data.name" mat-dialog-title>Create New Project</h1>
-<h1 *ngIf="data.name" mat-dialog-title>Edit Project</h1>
+<h1 *ngIf="!data.editing" mat-dialog-title>Create New Project</h1>
+<h1 *ngIf="data.editing" mat-dialog-title>Edit Project</h1>
 <div mat-dialog-content>
   <mat-form-field class="full-width">
     <mat-label>Project Name</mat-label>
@@ -22,6 +22,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button *ngIf="!data.name" mat-button [mat-dialog-close]="data" cdkFocusInitial>Create Project</button>
-  <button *ngIf="data.name" mat-button [mat-dialog-close]="data" cdkFocusInitial>Edit Project</button>
+  <button *ngIf="!data.editing" mat-button [mat-dialog-close]="data" cdkFocusInitial>Create Project</button>
+  <button *ngIf="data.editing" mat-button [mat-dialog-close]="data" cdkFocusInitial>Edit Project</button>
 </div>

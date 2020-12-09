@@ -55,7 +55,7 @@ export class ProjectComponent implements OnInit {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(ProjectBuilder, {
       width: '500px',
-      data: { name: project.name, description: project.description, color: project.color }
+      data: { name: project.name, description: project.description, color: project.color, editing: true }
     });
 
     dialogRef.afterClosed().subscribe(result => {
