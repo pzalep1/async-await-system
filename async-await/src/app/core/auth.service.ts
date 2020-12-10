@@ -49,7 +49,7 @@ export class AuthService {
         resolve(this.user);
       },
       (err) => {
-        document.location.href = 'http://localhost:4200/login';
+        // document.location.href = 'http://localhost:4200/login';
         reject(err);
       });
     });
