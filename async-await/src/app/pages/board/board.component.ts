@@ -218,7 +218,7 @@ export class BoardComponent implements OnInit {
     // tslint:disable-next-line: no-use-before-declare
     const dialogRef = this.dialog.open(UserBuilder, {
       width: '500px',
-      data: { users: this.notProjectUsers }
+      data: { users: this.notAdminUsers }
     });
 
     dialogRef.afterClosed().subscribe(result => {
