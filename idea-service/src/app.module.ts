@@ -26,7 +26,7 @@ import { Vote } from './entities/vote.entity';
     VotesModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: '172.17.0.0',
       port: 3306,
       username: 'root',
       password: 'example',
