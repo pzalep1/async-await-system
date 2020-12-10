@@ -38,7 +38,7 @@ export class ProjectComponent implements OnInit {
 
   logout() {
     this.auth.logout();
-    // document.location.href = 'http://localhost:4200/login';
+    document.location.href = 'http://witchofwcag.tech:4200/login';
   }
 
   createProject() {
