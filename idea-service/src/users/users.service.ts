@@ -14,6 +14,7 @@ export class UserService {
     if (found) {
       throw new HttpException('Email already in use', HttpStatus.CONFLICT);
     } else {
+      this.validateUser(user);
       await this.userRepository.insert(user);
       return;
     }
@@ -66,6 +67,23 @@ export class UserService {
       }
     } else {
       throw new HttpException('There is no user under that email', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  /**HELPER FUNCTIONS*/
+
+  validateUser(user: User) {
+    if (user.fName.trim().length === 0) {
+      throw new HttpException('Name cannot be empty string', HttpStatus.BAD_REQUEST);
+    }
+    if (user.lName.trim().length === 0) {
+      throw new HttpException('Name cannot be empty string', HttpStatus.BAD_REQUEST);
+    } 
+    if (user.email.trim().length === 0) {
+      throw new HttpException('Email cannot be an empty string', HttpStatus.BAD_REQUEST);
+    } 
+    if (user.password.length === 0) {
+      throw new HttpException('Password cannot be empty string', HttpStatus.BAD_REQUEST);
     }
   }
 }

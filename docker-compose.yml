@@ -20,27 +20,27 @@ services:
         ports: 
             - 8080:8080
     
-    client:
-        build: ./async-await
-        ports:
-                - "4200:4200"
-        volumes:
-            - ./async-await:/opt/src/app
-            - notused:/opt/src/app/node_modules
-        restart: on-failure
-        command: ng serve --host 0.0.0.0 --disable-host-check
+    # client:
+    #     build: ./async-await
+    #     ports:
+    #             - "4200:4200"
+    #     volumes:
+    #         - ./async-await:/opt/src/app
+    #         - notused:/opt/src/app/node_modules
+    #     restart: on-failure
+    #     command: ng serve --host 0.0.0.0 --disable-host-check
 
-    service:
-        build: ./idea-service
-        depends_on:
-            - "db"
-        ports: 
-            - "3002:3002"
-        volumes:
-            - ./idea-service:/opt/src/app
-            - notused:/opt/src/app/node_modules
-        restart: on-failure
-        command: npm start
+    # service:
+    #     build: ./idea-service
+    #     depends_on:
+    #         - "db"
+    #     ports: 
+    #         - "3002:3002"
+    #     volumes:
+    #         - ./idea-service:/opt/src/app
+    #         - notused:/opt/src/app/node_modules
+    #     restart: on-failure
+    #     command: npm start
 
 volumes:
     notused:

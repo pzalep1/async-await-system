@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://witchofwcag.tech:3002'
+  apiURL: 'http://localhost:3002'
 };
 
 /*

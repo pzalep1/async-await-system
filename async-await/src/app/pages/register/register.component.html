@@ -29,7 +29,7 @@
     <input matInput type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
   </mat-form-field>
   <mat-error *ngIf="passwordError">
-    Invalid password
+    {{ passwordMessage }}
   </mat-error>
   <button mat-raised-button (click)="register()">Register</button>
   <a class="login" [routerLink]="['/login']">Already have an account? Login here!</a>
